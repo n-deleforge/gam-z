@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html id="htmlTag">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gam'z</title>
+    <link rel="stylesheet" href="assets/css/tictactoe.min.css">
+    <link rel="icon" href="assets/images/favicon-tictactoe.ico" rel="icon" type="image/x-icon">
+</head>
+
+<body>
+    <div id="content">
+        <header id="title"></header>
+
+        <nav>
+            <div id="navPlayer"></div>
+        </nav>
+
+        <div id="tab">
+            <div class="line">
+                <div class="case c1"><span class="tic">X</span></div>
+                <div class="case c2"><span class="tac">O</span></div>
+                <div class="case c3"></div>
+            </div>
+            <div class="line">
+                <div class="case c4"></div>
+                <div class="case c5"><span class="tic">X</span></div>
+                <div class="case c6"></div>
+            </div>
+            <div class="line">
+                <div class="case c7"></div>
+                <div class="case c8"></div>
+                <div class="case c9"><span class="tac">O</span></div>
+            </div>
+        </div>
+
+        <footer>
+            <button id="game"></button>
+            <button id="quit"></button>
+        </footer>
+    </div>
+
+    <div id="containerPopup">
+        <div id="popup">
+            <h1 id="popupTitle"></h1>
+            <p id="popupText"></p>
+            <button id="reload"></button>
+        </div>
+    </div>
+
+    <audio id="writing">
+        <source src="assets/sounds/writing.mp3" prelopad type="audio/mpeg">
+    </audio>
+
+    <script src="assets/js/tictactoe.min.js"></script>
+</body>
+</html>

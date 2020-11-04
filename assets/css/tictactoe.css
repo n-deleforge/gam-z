@@ -1,0 +1,227 @@
+/* ================================================= */
+/* ======================= MAIN */
+
+@font-face {
+    font-family: 'dk_lemon_yellow';
+    src: url('../fonts/dk_lemon_yellow_sun.woff2') format('woff2'),
+           url('../fonts/dk_lemon_yellow_sun.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: dk_lemon_yellow;
+    color: white;
+    background-color: #262931;
+}
+
+/* ================================================= */
+/* ======================= CONTAINERS */
+
+#content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ================================================= */
+/* ======================= HEADER NAV FOOTER */
+
+header {
+    display: flex;
+    justify-content: center;
+    padding: 2vh;
+    font-size: 4em;
+    text-transform: uppercase;
+}
+
+nav {
+    display: none;
+    justify-content: center;
+    background: black;
+    padding: 2vh;
+    font-size: 2em;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 2vh;
+}
+
+/* ================================================= */
+/* ======================= DISPLAY */
+
+#tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.line {
+    display: flex;
+}
+
+.case {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    width: 15vw;
+    height: 20vh;
+}
+
+.c1 {
+    border-top: 2px solid transparent;
+    border-left: 2px solid transparent;
+}
+
+.c2 {
+    border-top: 2px solid transparent;
+}
+
+.c3 {
+    border-top: 2px solid transparent;
+    border-right: 2px solid transparent;
+}
+
+.c4 {
+    border-left: 2px solid transparent;
+}
+
+.c6 {
+    border-right: 2px solid transparent;
+}
+
+.c7 {
+    border-left: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+}
+
+.c8 {
+    border-bottom: 2px solid transparent;
+}
+
+.c9 {
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+}
+
+.tic {
+    color: lightskyblue;
+}
+
+.tac {
+    color: lightgreen;
+}
+
+.tic,
+.tac {
+    font-size: 7em;
+}
+
+/* ================================================= */
+/* ======================= FORM */
+
+button {
+    margin-left: 2vh;
+    margin-right: 2vh;
+    padding: 2vh;
+    width: 15vw;
+    background: black;
+    border: 2px solid transparent;
+    color: white;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 2em;
+    font-family: dk_lemon_yellow;
+    transform: scale(1);
+    transition: transform 0.5s;
+}
+
+button:hover {
+    transform: scale(1.2);
+}
+
+/* ================================================= */
+/* ======================= POPUP */
+
+#containerPopup {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    z-index: 5;
+}
+
+#containerPopup:target {
+    display: block;
+}
+
+#popup {
+    display: block;
+    background: #262931;
+    color: white;
+    padding: 2vh;
+    position: relative;
+    width: 50vw;
+    border-radius: 10px;
+    text-align: center;
+    margin: auto auto;
+}
+
+#popup h1 {
+    border-bottom: 2px solid white;
+    font-size: 4.5em;
+    margin-top: 0;
+}
+
+#popup p {
+    font-size: 2em;
+    text-align: center;
+}
+
+/* ================================================= */
+/* ======================= MOBILE */
+
+@media(max-width: 1024px) {
+    #navPlayer {
+        padding: 2vw;
+    }
+
+    .case {
+        width: 30vw;
+        height: 16vh;
+    }
+
+    button {
+        width: 40vw;
+        padding: 3vh;
+        margin: 1vh;
+    }
+
+    #containerPopup {
+        background-color: black;
+    }
+
+    #popup {
+        width: 85%;
+    }
+
+    #popup h1 {
+        font-size: 3em;
+    }
+    
+    #popup p {
+        font-size: 1.8em;
+    }
+}

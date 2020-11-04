@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html id="htmlTag">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gam'z</title>
+    <link rel="stylesheet" href="assets/css/hangman.min.css">
+    <link rel="icon" href="assets/images/favicon-hangman.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="content">
+        <header id="title"></header>
+
+        <div id="container">
+
+            <div id="start">
+                <p id="rules"></p>
+                <div class="listButtons">
+                    <button id="play"></button>
+                    <button id="quit"></button>
+                </div>
+            </div>
+
+            <div id="game">
+              <div id="hangman"></div>
+                <div id="display"></div>
+                <input id="letter" placeHolder="" focus pattern="[A-Za-z]{1}" maxlength="1" autocomplete="off">
+                <div id="message"></div>
+                <div id="list"></div>
+
+                <div class="listButtons">
+                    <button id="giveup"></button>
+                    <button id="reload"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/hangman.min.js"></script>
+</body>
+</html>
