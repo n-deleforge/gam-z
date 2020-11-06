@@ -141,10 +141,10 @@ function displayPlayer(mode) {
     else player = 1;
   }
 
-  if (player == 1) get("#navPlayer").style.color = "lightskyblue";
-  else get("#navPlayer").style.color = "lightgreen";
+  if (player == 1) get("#player").style.color = "lightskyblue";
+  else get("#player").style.color = "lightgreen";
   
-  return get("#navPlayer").innerHTML = display.app.turn_part1 + player + display.app.turn_part2;
+  return get("#player").innerHTML = display.app.turn_part1 + player + display.app.turn_part2;
 }
 
 // ===> Check if the array is full

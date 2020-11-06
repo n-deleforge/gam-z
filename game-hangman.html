@@ -14,20 +14,25 @@
         <header id="title"></header>
 
         <div id="container">
-
+            <!-- RULES -->
             <div id="start">
                 <p id="rules"></p>
+
                 <div class="listButtons">
                     <button id="play"></button>
                     <button id="quit"></button>
                 </div>
             </div>
+            <!-- // RULES -->
 
+            <!-- APP -->
             <div id="game">
-              <div id="hangman"></div>
+                <div id="hangman"></div>
                 <div id="display"></div>
+
                 <input id="letter" placeHolder="" focus pattern="[A-Za-z]{1}" maxlength="1" autocomplete="off">
                 <div id="message"></div>
+                
                 <div id="list"></div>
 
                 <div class="listButtons">
@@ -35,9 +40,12 @@
                     <button id="reload"></button>
                 </div>
             </div>
+            <!-- // APP -->
         </div>
+
     </div>
 
+    <script src="assets/js/sw.js"></script>
     <script src="assets/js/hangman.min.js"></script>
 </body>
 </html>
