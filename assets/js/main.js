@@ -14,8 +14,7 @@ const FR = {
     'title' : "Salut Gamer'z",
     'subtitle' : "Les classiques",
     'links' : "Disponible sur " + linkGitHub + " (v " + version + ")<br />Heberge sur " + linkHome,
-    'classicGame1' : "Morpion",
-    'classicGame2' : "Le pendu"
+    'classicGame1' : "Morpion"
 }
 
 // ===> English translation
@@ -23,8 +22,7 @@ const EN = {
     'title' : "Hey Gamer'z",
     'subtitle' : "Classic games",
     'links' : "Available on " + linkGitHub + " (v " + version + ")<br />Hosted on " + linkHome,
-    'classicGame1' : "Tic tac toe",
-    'classicGame2' : "The hangman"
+    'classicGame1' : "Tic tac toe"
 }
 
 // ===> Will determine the language of the app
