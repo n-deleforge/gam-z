@@ -1,7 +1,7 @@
 # Gam'z
 
 > Version 1.1 :memo:  
-> An application which group several little games as Tic Tac Toe and the Hangman.
+> An application which group several little games as Tic Tac Toe.
 
 ## How to use it ?
 

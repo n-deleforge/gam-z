@@ -141,12 +141,10 @@ button {
     text-transform: uppercase;
     font-size: 2em;
     font-family: dk_lemon_yellow;
-    transform: scale(1);
-    transition: transform 0.5s;
 }
 
 button:hover {
-    transform: scale(1.2);
+    border: 2px solid white;
 }
 
 /* ================================================= */

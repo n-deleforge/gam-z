@@ -1,66 +1,5 @@
 // =================================================
 // =================================================
-// ============ INITIALISATION
-
-// ===> Correct the bug with viewport on mobile
-if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) get("#content").style.minHeight = window.outerHeight + 'px';
-
-// ===> French translation
-const FR = {
-    'auto' : {
-      'title' : "Morpion",
-      'game' : "Jouer",
-      'quit' : "Quitter",
-      'popupTitle' : "Fin de partie",
-      'reload' : "Fermer"
-    },
-    'app' : {
-      'turn_part1' : "C'est au tour du joueur ",
-      'turn_part2' : "",
-      'victory_part1' : "Victoire du joueur ",
-      'victory_part2' : " 😁",
-      'draw' : "Égalité 😱"
-    }
-}
-
-// ===> English translation
-const EN = {
-  'auto' : {
-    'title' : "Tic Tac Toe",
-    'game' : "Play",
-    'quit' : "Quit",
-    'popupTitle' : "Game over",
-    'reload' : "Close"
-  },
-  'app' : {
-    'turn_part1' : "Player ",
-    'turn_part2' : " turn",
-    'victory_part1' : "Player ",
-    'victory_part2' : " won 😁",
-    'draw' : "Draw 😱"
-  }
-}
-
-// ===> Will determine the language of the app
-if (navigator.language == "fr" || navigator.language == "fr-FR") {
-    display = FR;
-    get("#htmlTag").lang = "fr";
-}
-else {
-    display = EN;
-    get("#htmlTag").lang = "en";
-}
-
-// ===> Automatically fill all ID fields
-for(let i = 0; i < Object.keys(display).length - 1; i++) {
-  let allData = display[Object.keys(display)[i]];
-  let idName = Object.keys(allData);
-  let values = Object.values(allData);
-  for (let j = 0; j < idName.length; j++) get("#" + idName[j]).innerHTML = values[j];
-}
-
-// =================================================
-// =================================================
 // ============ SETTINGS
 
 let grid = 3; // Nb of cases in the grid
@@ -72,12 +11,16 @@ let list; // List of all cases
 // =================================================
 // ============ MAIN
 
-// ===> Start the game
-get("#quit").addEventListener("click", function() { history.back(); });
+// Quit button
+get("#quit").addEventListener("click", function() { document.location.href="https://nicolas-deleforge.fr/apps/gamz" });
+
+// Start button
 get("#game").addEventListener("click", function() {
+  // Check the display of the game
   document.getElementsByTagName("nav")[0].style.display = "flex";
   get("#game").style.display = "none";
-  displayPlayer()
+  get("#quit").style.display = "none";
+  displayPlayer();
 
   // Creation of the grid
   tab = new Array(grid * grid);
@@ -87,7 +30,9 @@ get("#game").addEventListener("click", function() {
   list = get(".case");
   for (let cell = 0; cell < list.length; cell++) {
     list[cell].innerHTML = "";
-    list[cell].addEventListener("click", function () { play(cell, tab, pawn()); });
+    list[cell].addEventListener("click", function () { 
+      play(cell, tab, pawn()); 
+    });
   }
 });
 
@@ -111,13 +56,16 @@ function play(cell, array, symbol) {
 
       // Check the victory
       if (victory(tab, cell)) {
-        if (player == 1) get("#popupText").style.color = "lightskyblue";
-        else get("#popupText").style.color = "lightgreen";
-        get("#popupText").innerHTML = display.app.victory_part1 + player + display.app.victory_part2;
+        if (player == 1) 
+          get("#popupText").style.color = "lightskyblue";
+        else 
+          get("#popupText").style.color = "lightgreen";
+          
+        get("#popupText").innerHTML = display.victory_part1 + player + display.victory_part2;
       }
 
       // Check the draw
-      if (fullTable(tab) && !victory(tab, cell)) get("#popupText").innerHTML = display.app.draw;
+      if (fullTable(tab) && !victory(tab, cell)) get("#popupText").innerHTML = display.draw;
     }
 
     displayPlayer("newPlayer")
@@ -130,21 +78,27 @@ function play(cell, array, symbol) {
 
 // ===> Determine the pawn of the player
 function pawn() {
-  if (player == 1) return '<span class="tic">X</span>';
-  else return '<span class="tac">O</span>';
+  if (player == 1) 
+    return '<span class="tic">X</span>';
+  else 
+    return '<span class="tac">O</span>';
 }
 
 // ===> Display the player who's playing
 function displayPlayer(mode) {
   if (mode == "newPlayer") {
-    if (player == 1) player = 2;
-    else player = 1;
+    if (player == 1) 
+      player = 2;
+    else 
+      player = 1;
   }
 
-  if (player == 1) get("#player").style.color = "lightskyblue";
-  else get("#player").style.color = "lightgreen";
+  if (player == 1) 
+    get("#player").style.color = "lightskyblue";
+  else 
+    get("#player").style.color = "lightgreen";
   
-  return get("#player").innerHTML = display.app.turn_part1 + player + display.app.turn_part2;
+  return get("#player").innerHTML = display.turn_part1 + player + display.turn_part2;
 }
 
 // ===> Check if the array is full
@@ -167,15 +121,4 @@ function victory(array, lastPosition) {
     (array[2] == combo && array[4] == combo && array[6] == combo))
     return true;
   return false;
-}
-
-// =================================================
-// =================================================
-// ============ GENERIC
-
-// ===> Easy selector
-function get(n) {
-  if (n.search("#") == 0 && n.split("#")[1] != null && document.querySelector(n) != null) return document.querySelector(n);
-  if (n.search(".") == 0 && n.split(".")[1] != null && document.querySelectorAll(n) != null) return document.querySelectorAll(n);
-  if (n.search("~") == 0 && n.split("~")[1] != null && document.querySelectorAll(n.split("~")[1]) != null) return document.querySelectorAll(n.split("~")[1])[0];
 }

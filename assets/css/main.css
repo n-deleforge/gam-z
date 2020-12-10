@@ -27,7 +27,7 @@ body {
 /* ======================================== */
 /* ======== CONTAINER */
 
-#container {
+#content {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -36,14 +36,14 @@ body {
     text-align: center;
 }
 
-#content {
+#categorieList {
     flex-grow: 1;
     display: flex;
     justify-content: space-around;
     padding: 2vh 15vw;
 }
 
-.subContent {
+.subCategorie {
     display: flex;
     flex-direction: column;
 }
@@ -128,7 +128,6 @@ footer a:active {
     }
 
     #content {
-        padding: 2vh 5vw;
         flex-direction: column;
         justify-content: flex-start;
     }
