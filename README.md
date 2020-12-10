@@ -9,6 +9,6 @@ You can try the app : https://nicolas-deleforge.fr/apps/gamz/
 Or download it : https://github.com/n-deleforge/gamz/archive/main.zip  
 Or clone the git : ```git clone https://github.com/n-deleforge/gamez.git```
 
-## How does it work ?
+## Note for self-host
 
-The application is written in native JavaScript so no depencies are needed, except a modern browser.
+If you download or clone the project to host it yourself, then you'll need [**Little JS**](https://github.com/n-deleforge/littleJS).
