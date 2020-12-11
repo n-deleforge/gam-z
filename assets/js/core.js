@@ -7,7 +7,7 @@ let FR;
 let EN;
 
 // ===> Correct the bug with viewport on mobile
-if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) get("#content").style.minHeight = window.outerHeight + 'px';
+if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) get("#content").style.minHeight = window.innerHeight + 'px';
 
 switch (page) {
     // Main screen
