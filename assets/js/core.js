@@ -1,35 +1,37 @@
-// ===> General variables
-const version = 1.1; // the actual version of the app
-const linkGitHub = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/gam-z\">GitHub</a>";
-const linkHome = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
-const page = document.currentScript.src.split("?")[1];
-let FR;
-let EN;
+// =================================================
+// =================================================
+// ============ CORE VARIABLES
+
+const version = 1.2;
+const githubLink = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/gam-z\">GitHub</a>";
+const homeLink = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
+const currentPage = document.currentScript.src.split("?")[1];
+const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+let display; let french; let english;
+
+// =================================================
+// =================================================
+// ============ CORE INITIALISATION
 
 // ===> Correct the bug with viewport on mobile
-if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) get("#content").style.minHeight = window.innerHeight + 'px';
+if (mobile) get("#content").style.minHeight = window.innerHeight + 'px';
 
-switch (page) {
-    // Main screen
-    case "main":
-        FR = {
-            'title': "Salut Gamer'z",
-            'subtitle': "Les classiques",
-            'links': "Disponible sur " + linkGitHub + " (v " + version + ")<br />Heberge sur " + linkHome,
+// ===> According the page, choose the correct array of words
+switch (currentPage) {  
+    case "main": // Main screen
+        french = {
+            'subtitle': "Liste des jeux",
+            'links': "Disponible sur " + githubLink + " (v " + version + ")<br />Heberge sur " + homeLink,
             'classicGame1': "Morpion"
-        }
-
-        EN = {
-            'title': "Hey Gamer'z",
-            'subtitle': "Classic games",
-            'links': "Available on " + linkGitHub + " (v " + version + ")<br />Hosted on " + linkHome,
+        };
+        english = {
+            'subtitle': "Games list",
+            'links': "Available on " + githubLink + " (v " + version + ")<br />Hosted on " + homeLink,
             'classicGame1': "Tic tac toe"
-        }
+        };
         break;
-
-    // Game : Tic Tac Toe
-    case "tictactoe":
-        FR = {
+    case "tictactoe": // Game : Tic Tac Toe
+        french = {
             'title': "Morpion",
             'game': "Jouer",
             'quit': "Quitter",
@@ -40,9 +42,8 @@ switch (page) {
             'victory_part1': "Victoire du joueur ",
             'victory_part2': " 😁",
             'draw': "Égalité 😱"
-        }
-
-        EN = {
+        };
+        english = {
             'title': "Tic Tac Toe",
             'game': "Play",
             'quit': "Quit",
@@ -53,23 +54,25 @@ switch (page) {
             'victory_part1': "Player ",
             'victory_part2': " won 😁",
             'draw': "Draw 😱"
-        }
+        };
         break;
 }
 
 // ===> Determine the language of the app
 if (navigator.language == "fr" || navigator.language == "fr-FR") {
-    display = FR;
+    display = french;
     get("#htmlTag").lang = "fr";
 } else {
-    display = EN;
+    display = english;
     get("#htmlTag").lang = "en";
 }
 
 // ===> Automatically fill all ID fields
-let idName = Object.keys(display);
+let names = Object.keys(display);
 let values = Object.values(display);
 
-for (let i = 0; i < idName.length; i++) {
-    if (get("#" + idName[i])) get("#" + idName[i]).innerHTML = values[i];
+for (let i = 0; i < names.length; i++) {
+    if (get("#" + names[i])) {
+        get("#" + names[i]).innerHTML = values[i];
+    }
 }

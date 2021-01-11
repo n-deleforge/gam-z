@@ -1,5 +1,19 @@
 /* ================================================= */
+/* ================================================= */
 /* ======================= MAIN */
+
+:root {
+    --background: #262931;
+    --mainTextColor: white;
+    --navBackground : black;
+    --mainColor : white;
+    --ticTacToeColor1 : lightskyblue;
+    --ticTacToeColor2 : lightgreen;
+    --buttonColor1 : black;
+    --buttonColor2 : white;
+    --popupBackground : black;
+    --popupTitleUnderline : white;
+}
 
 @font-face {
     font-family: 'dk_lemon_yellow';
@@ -15,21 +29,19 @@ body {
     margin: 0;
     padding: 0;
     font-family: dk_lemon_yellow;
-    color: white;
-    background-color: #262931;
+    background-color: var(--background);
+    color: var(--mainTextColor);
 }
 
 /* ================================================= */
-/* ======================= CONTAINERS */
+/* ================================================= */
+/* ======================= GENERAL */
 
 #content {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
-
-/* ================================================= */
-/* ======================= HEADER NAV FOOTER */
 
 header {
     display: flex;
@@ -42,7 +54,7 @@ header {
 nav {
     display: none;
     justify-content: center;
-    background: black;
+    background: var(--navBackground);
     padding: 2vh;
     font-size: 2em;
 }
@@ -54,7 +66,8 @@ footer {
 }
 
 /* ================================================= */
-/* ======================= DISPLAY */
+/* ================================================= */
+/* ======================= GAME */
 
 #tab {
     display: flex;
@@ -72,7 +85,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid white;
+    border: 2px solid var(--mainTextColor);
     width: 15vw;
     height: 20vh;
 }
@@ -114,11 +127,11 @@ footer {
 }
 
 .tic {
-    color: lightskyblue;
+    color: var(--ticTacToeColor1);
 }
 
 .tac {
-    color: lightgreen;
+    color: var(--ticTacToeColor2);
 }
 
 .tic,
@@ -127,16 +140,17 @@ footer {
 }
 
 /* ================================================= */
-/* ======================= FORM */
+/* ================================================= */
+/* ======================= BUTTONS */
 
 button {
     margin-left: 2vh;
     margin-right: 2vh;
     padding: 2vh;
     width: 15vw;
-    background: black;
+    background: var(--buttonColor1);
+    color: var(--buttonColor2);
     border: 2px solid transparent;
-    color: white;
     border-radius: 10px;
     text-transform: uppercase;
     font-size: 2em;
@@ -144,9 +158,10 @@ button {
 }
 
 button:hover {
-    border: 2px solid white;
+    border: 2px solid (var(--buttonColor2));
 }
 
+/* ================================================= */
 /* ================================================= */
 /* ======================= POPUP */
 
@@ -157,7 +172,7 @@ button:hover {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: black;
+    background-color: var(--popupBackground);
     z-index: 5;
 }
 
@@ -167,8 +182,8 @@ button:hover {
 
 #popup {
     display: block;
-    background: #262931;
-    color: white;
+    background-color: var(--background);
+    color: var(--mainTextColor);
     padding: 2vh;
     position: relative;
     width: 50vw;
@@ -177,17 +192,18 @@ button:hover {
     margin: auto auto;
 }
 
-#popup h1 {
-    border-bottom: 2px solid white;
+#popupTitle {
+    border-bottom: 2px solid var(--popupTitleUnderline);
     font-size: 4.5em;
     margin-top: 0;
 }
 
-#popup p {
-    font-size: 2em;
+#popupText {
+    font-size: 3em;
     text-align: center;
 }
 
+/* ================================================= */
 /* ================================================= */
 /* ======================= MOBILE */
 
@@ -207,19 +223,20 @@ button:hover {
         margin: 1vh;
     }
 
-    #containerPopup {
-        background-color: black;
+    button:focus,
+    button:active {
+        outline: none !important;
     }
 
     #popup {
         width: 85%;
     }
 
-    #popup h1 {
+    #popupTitle {
         font-size: 3em;
     }
     
-    #popup p {
+    #popupText {
         font-size: 1.8em;
     }
 }

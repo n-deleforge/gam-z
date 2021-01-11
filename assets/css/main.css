@@ -3,7 +3,12 @@
 /* ======== MAIN */
 
 :root {
-    --grey: #262931;
+    --background: #262931;
+    --mainTextColor : white;
+    --titleColor : lightcoral;
+    --footerLinkColor : lightcoral;
+    --buttonGameColor1 : lightcoral;
+    --buttonGameColor2 : white;
 }
 
 @font-face {
@@ -21,20 +26,48 @@ body {
     padding: 0;
     font-family: gameplay, sans-serif;
     font-size: 1.3em;
+    background-color: var(--background);
+    color: var(--mainTextColor);
 }
 
 /* ======================================== */
 /* ======================================== */
-/* ======== CONTAINER */
+/* ======== GENERAL */
 
 #content {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: var(--grey);
-    color: white;
     text-align: center;
 }
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5vh;
+    font-size: 3em;
+    color: var(--titleColor);
+}
+
+footer {
+    padding: 2vh;
+    font-size: 0.7em;
+    line-height: 1.6em;
+}
+
+footer a {
+    color: var(--footerLinkColor);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ======================================== */
+/* ======================================== */
+/* ======== GAME LIST */
 
 #categorieList {
     flex-grow: 1;
@@ -48,38 +81,6 @@ body {
     flex-direction: column;
 }
 
-/* ======================================== */
-/* ======================================== */
-/* ======== HEADER + FOOTER */
-
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5vh;
-    font-size: 1.8em;
-    text-decoration: underline;
-}
-
-footer {
-    text-align: center;
-    padding: 2vh;
-    font-size: 0.7em;
-}
-
-footer a {
-    color: lightcoral;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-/* ======================================== */
-/* ======================================== */
-/* ======== DISPLAY */
-
 .gameList {
     display: flex;
     flex-direction: column;
@@ -89,28 +90,18 @@ footer a:hover {
 }
 
 .gameList a {
-    text-decoration: none;
-    border: 0;
-    background: white;
+    text-decoration: underline 5px solid var(--buttonGameColor1);
     padding: 2vh;
     margin: 2vh;
-    border-radius: 10px;
     font-family: gameplay, sans-serif;
-    font-size: 1em;
-    width: 25vw;
-    color: black;
+    font-size: 1.5em;
+    color: var(--buttonGameColor2);
 }
 
 .gameList a:hover {
-    background-color: lightcoral;
-    color: white;
-}
-
-.gameList a:focus,
-.gameList a:active,
-footer a:focus,
-footer a:active {
-    outline: none !important;
+    text-decoration: 2px solid transparent;
+    background-color: var(--buttonGameColor1);
+    color: var(--buttonGameColor2);
 }
 
 /* ======================================== */
@@ -123,16 +114,15 @@ footer a:active {
         font-size: 1.2em;
     }
 
-    header {
-        font-size: 1.6em;
+    .gameList a:focus,
+    .gameList a:active,
+    footer a:focus,
+    footer a:active {
+        outline: none !important;
     }
 
     #content {
         flex-direction: column;
         justify-content: flex-start;
-    }
-
-    .gameList a {
-        width: 50vw;
     }
 }
