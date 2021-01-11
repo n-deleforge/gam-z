@@ -1,26 +1,25 @@
-/* ================================================= */
-/* ================================================= */
-/* ======================= MAIN */
+/* ======================================== */
+/* ======================================== */
+/* ======== MAIN */
 
 :root {
     --background: #262931;
     --mainTextColor: white;
-    --navBackground : black;
-    --mainColor : white;
-    --ticTacToeColor1 : lightskyblue;
-    --ticTacToeColor2 : lightgreen;
-    --buttonColor1 : black;
-    --buttonColor2 : white;
-    --popupBackground : black;
-    --popupTitleUnderline : white;
+    --navBackground: black;
+    --mainColor: white;
+    --ticTacToeColor1: lightskyblue;
+    --ticTacToeColor2: lightgreen;
+    --buttonColor1: black;
+    --buttonColor2: white;
+    --popupBackground: black;
+    --popupTitleUnderline: white;
 }
 
 @font-face {
     font-family: 'dk_lemon_yellow';
-    src: url('../fonts/dk_lemon_yellow_sun.woff2') format('woff2'),
-           url('../fonts/dk_lemon_yellow_sun.woff') format('woff');
-    font-weight: normal;
     font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/dk_lemon_yellow_sun.woff2') format('woff2'), url('../fonts/dk_lemon_yellow_sun.woff') format('woff');
     font-display: swap;
 }
 
@@ -29,13 +28,13 @@ body {
     margin: 0;
     padding: 0;
     font-family: dk_lemon_yellow;
-    background-color: var(--background);
     color: var(--mainTextColor);
+    background-color: var(--background);
 }
 
-/* ================================================= */
-/* ================================================= */
-/* ======================= GENERAL */
+/* ======================================== */
+/* ======================================== */
+/* ======== GENERAL */
 
 #content {
     display: flex;
@@ -47,16 +46,16 @@ header {
     display: flex;
     justify-content: center;
     padding: 2vh;
-    font-size: 4em;
     text-transform: uppercase;
+    font-size: 4em;
 }
 
 nav {
     display: none;
     justify-content: center;
-    background: var(--navBackground);
     padding: 2vh;
     font-size: 2em;
+    background: var(--navBackground);
 }
 
 footer {
@@ -65,16 +64,16 @@ footer {
     padding: 2vh;
 }
 
-/* ================================================= */
-/* ================================================= */
-/* ======================= GAME */
+/* ======================================== */
+/* ======================================== */
+/* ======== GAME */
 
 #tab {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
 }
 
 .line {
@@ -83,11 +82,11 @@ footer {
 
 .case {
     display: flex;
-    justify-content: center;
     align-items: center;
-    border: 2px solid var(--mainTextColor);
+    justify-content: center;
     width: 15vw;
     height: 20vh;
+    border: 2px solid var(--mainTextColor);
 }
 
 .c1 {
@@ -113,8 +112,8 @@ footer {
 }
 
 .c7 {
-    border-left: 2px solid transparent;
     border-bottom: 2px solid transparent;
+    border-left: 2px solid transparent;
 }
 
 .c8 {
@@ -139,41 +138,41 @@ footer {
     font-size: 7em;
 }
 
-/* ================================================= */
-/* ================================================= */
-/* ======================= BUTTONS */
+/* ======================================== */
+/* ======================================== */
+/* ======== BUTTONS */
 
 button {
-    margin-left: 2vh;
-    margin-right: 2vh;
-    padding: 2vh;
     width: 15vw;
-    background: var(--buttonColor1);
-    color: var(--buttonColor2);
+    margin-right: 2vh;
+    margin-left: 2vh;
+    padding: 2vh;
     border: 2px solid transparent;
     border-radius: 10px;
     text-transform: uppercase;
-    font-size: 2em;
     font-family: dk_lemon_yellow;
+    font-size: 2em;
+    color: var(--buttonColor2);
+    background: var(--buttonColor1);
 }
 
 button:hover {
-    border: 2px solid (var(--buttonColor2));
+    border: 2px solid(var(--buttonColor2) );
 }
 
-/* ================================================= */
-/* ================================================= */
-/* ======================= POPUP */
+/* ======================================== */
+/* ======================================== */
+/* ======== POPUP */
 
 #containerPopup {
     display: none;
+    z-index: 5;
     position: fixed;
     top: 0;
+    right: 0;
     bottom: 0;
     left: 0;
-    right: 0;
     background-color: var(--popupBackground);
-    z-index: 5;
 }
 
 #containerPopup:target {
@@ -182,32 +181,32 @@ button:hover {
 
 #popup {
     display: block;
-    background-color: var(--background);
-    color: var(--mainTextColor);
-    padding: 2vh;
     position: relative;
     width: 50vw;
+    margin: auto auto;
+    padding: 2vh;
     border-radius: 10px;
     text-align: center;
-    margin: auto auto;
+    color: var(--mainTextColor);
+    background-color: var(--background);
 }
 
 #popupTitle {
+    margin-top: 0;
     border-bottom: 2px solid var(--popupTitleUnderline);
     font-size: 4.5em;
-    margin-top: 0;
 }
 
 #popupText {
-    font-size: 3em;
     text-align: center;
+    font-size: 3em;
 }
 
-/* ================================================= */
-/* ================================================= */
-/* ======================= MOBILE */
+/* ======================================== */
+/* ======================================== */
+/* ======== MOBILE */
 
-@media(max-width: 1024px) {
+@media(max-width:1024px) {
     #navPlayer {
         padding: 2vw;
     }
@@ -219,8 +218,8 @@ button:hover {
 
     button {
         width: 40vw;
-        padding: 3vh;
         margin: 1vh;
+        padding: 3vh;
     }
 
     button:focus,
@@ -235,7 +234,7 @@ button:hover {
     #popupTitle {
         font-size: 3em;
     }
-    
+
     #popupText {
         font-size: 1.8em;
     }

@@ -4,19 +4,18 @@
 
 :root {
     --background: #262931;
-    --mainTextColor : white;
-    --titleColor : lightcoral;
-    --footerLinkColor : lightcoral;
-    --buttonGameColor1 : lightcoral;
-    --buttonGameColor2 : white;
+    --mainTextColor: white;
+    --titleColor: lightcoral;
+    --footerLinkColor: lightcoral;
+    --buttonGameColor1: lightcoral;
+    --buttonGameColor2: white;
 }
 
 @font-face {
     font-family: 'gameplay';
-    src: url('../fonts/gameplay.woff2') format('woff2'),
-           url('../fonts/gameplay.woff') format('woff');
-    font-weight: normal;
     font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/gameplay.woff2') format('woff2'), url('../fonts/gameplay.woff') format('woff');
     font-display: swap;
 }
 
@@ -24,10 +23,10 @@ html,
 body {
     margin: 0;
     padding: 0;
-    font-family: gameplay, sans-serif;
+    font-family: gameplay,sans-serif;
     font-size: 1.3em;
-    background-color: var(--background);
     color: var(--mainTextColor);
+    background-color: var(--background);
 }
 
 /* ======================================== */
@@ -43,8 +42,8 @@ body {
 
 header {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     padding: 5vh;
     font-size: 3em;
     color: var(--titleColor);
@@ -57,8 +56,8 @@ footer {
 }
 
 footer a {
-    color: var(--footerLinkColor);
     text-decoration: none;
+    color: var(--footerLinkColor);
 }
 
 footer a:hover {
@@ -70,8 +69,8 @@ footer a:hover {
 /* ======== GAME LIST */
 
 #categorieList {
-    flex-grow: 1;
     display: flex;
+    flex-grow: 1;
     justify-content: space-around;
     padding: 2vh 15vw;
 }
@@ -85,30 +84,30 @@ footer a:hover {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-evenly;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .gameList a {
-    text-decoration: underline 5px solid var(--buttonGameColor1);
-    padding: 2vh;
     margin: 2vh;
-    font-family: gameplay, sans-serif;
+    padding: 2vh;
+    text-decoration: underline 5px solid var(--buttonGameColor1);
+    font-family: gameplay,sans-serif;
     font-size: 1.5em;
     color: var(--buttonGameColor2);
 }
 
 .gameList a:hover {
     text-decoration: 2px solid transparent;
-    background-color: var(--buttonGameColor1);
     color: var(--buttonGameColor2);
+    background-color: var(--buttonGameColor1);
 }
 
 /* ======================================== */
 /* ======================================== */
 /* ======== MOBILE */
 
-@media(max-width: 1024px) {
+@media(max-width:1024px) {
     html,
     body {
         font-size: 1.2em;
