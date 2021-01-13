@@ -2,31 +2,31 @@
 // =================================================
 // ============ CORE VARIABLES
 
-const version = 1.2;
-const githubLink = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/gam-z\">GitHub</a>";
-const homeLink = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
-const currentPage = document.currentScript.src.split("?")[1];
-const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-let display; let french; let english;
+let french; let english;
+const VERSION = 1.2;
+const GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/gam-z\">GitHub</a>";
+const HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
+const CURRENT_PAGE = document.currentScript.src.split("?")[1];
+const MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 // =================================================
 // =================================================
 // ============ CORE INITIALISATION
 
 // ===> Correct the bug with viewport on mobile
-if (mobile) get("#content").style.minHeight = window.innerHeight + 'px';
+if (MOBILE) get("#content").style.minHeight = window.innerHeight + 'px';
 
 // ===> According the page, choose the correct array of words
-switch (currentPage) {  
+switch (CURRENT_PAGE) {  
     case "main": // Main screen
         french = {
             'subtitle': "Liste des jeux",
-            'links': "Disponible sur " + githubLink + " (v " + version + ")<br />Heberge sur " + homeLink,
+            'links': "Disponible sur " + GITHUB + " (v " + VERSION + ")<br />Heberge sur " + HOME,
             'classicGame1': "Morpion"
         };
         english = {
             'subtitle': "Games list",
-            'links': "Available on " + githubLink + " (v " + version + ")<br />Hosted on " + homeLink,
+            'links': "Available on " + GITHUB + " (v " + VERSION + ")<br />Hosted on " + HOME,
             'classicGame1': "Tic tac toe"
         };
         break;
@@ -59,17 +59,9 @@ switch (currentPage) {
 }
 
 // ===> Determine the language of the app
-if (navigator.language == "fr" || navigator.language == "fr-FR") {
-    display = french;
-    get("#htmlTag").lang = "fr";
-} else {
-    display = english;
-    get("#htmlTag").lang = "en";
-}
-
-// ===> Automatically fill all ID fields
-let names = Object.keys(display);
-let values = Object.values(display);
+const CONTENT = navigator.language == "fr" || navigator.language == "fr-FR" ? french : english;
+let names = Object.keys(CONTENT);
+let values = Object.values(CONTENT);
 
 for (let i = 0; i < names.length; i++) {
     if (get("#" + names[i])) {
