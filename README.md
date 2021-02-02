@@ -15,6 +15,6 @@ If you download or clone the project to host it yourself, then you'll need [**Li
 
 # Changelog
  
- -1.3 : Again a big app rewriting with CSS and JS cleaning. Hangman comebn)ack with a virtual keyboard. TicTacToe modified a bit. 
+- 1.3 : Again a big app rewriting with CSS and JS cleaning. Hangman comebn)ack with a virtual keyboard. TicTacToe modified a bit. 
 - 1.2 : Big rewriting of the app, some fixes in the JS code and better readability, CSS variables added, hangout removed in waiting to make it better on the mobile version
 - 1.1 : Initial release
