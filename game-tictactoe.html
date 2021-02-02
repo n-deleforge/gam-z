@@ -6,15 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gam'z</title>
     <link rel="stylesheet" href="assets/css/tictactoe.min.css">
-    <link rel="icon" href="assets/images/favicon-tictactoe.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
 
     <!-- GAME -->
-    <div id="content">
-        <header id="title"></header>
-        <nav id="player"></nav>
+    <div id="container">
+        <div id="player"></div>
 
         <div id="tab">
             <div class="line">
@@ -34,22 +33,17 @@
             </div>
         </div>
 
-        <footer>
-            <button id="game"></button>
-            <button id="quit"></button>
-        </footer>
-    </div>
-    <!-- // GAME -->
+        <div id="results">
+            <p id="resultsText"></p>
+        </div>
 
-    <!-- POPUP RESULTS -->
-    <div id="containerPopup">
-        <div id="popup">
-            <h1 id="popupTitle"></h1>
-                <p id="popupText"></p>
-                <button id="reload"></button>
+        <div id="listButton">
+            <button id="game"></button>
+            <button id="reload"></button>
+            <button id="quit"></button>
         </div>
     </div>
-    <!-- // POPUP RESULTS -->
+    <!-- // GAME -->
 
     <!-- SOUNDS -->
     <audio id="writing">
@@ -59,6 +53,6 @@
 
     <!-- ADD LITTLE JS HERE -->
     <script src="assets/js/core.min.js?tictactoe"></script>
-    <script src="assets/js/tictactoe.js"></script>
+    <script src="assets/js/tictactoe.min.js"></script>
 </body>
 </html>

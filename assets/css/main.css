@@ -1,6 +1,6 @@
 /* ======================================== */
 /* ======================================== */
-/* ======== MAIN */
+/* ======== VARIABLES */
 
 :root {
     --background: #262931;
@@ -10,6 +10,10 @@
     --buttonGameColor1: lightcoral;
     --buttonGameColor2: white;
 }
+
+/* ======================================== */
+/* ======================================== */
+/* ======== MAIN */
 
 @font-face {
     font-family: 'gameplay';
@@ -29,15 +33,22 @@ body {
     background-color: var(--background);
 }
 
-/* ======================================== */
-/* ======================================== */
-/* ======== GENERAL */
-
-#content {
+#container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     text-align: center;
+}
+
+/* ======================================== */
+/* ======================================== */
+/* ======== APP */
+
+#app {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    padding: 2vh 15vw;
 }
 
 header {
@@ -49,40 +60,23 @@ header {
     color: var(--titleColor);
 }
 
-footer {
+#links {
     padding: 2vh;
     font-size: 0.7em;
     line-height: 1.6em;
 }
 
-footer a {
-    text-decoration: none;
+#links a {
     color: var(--footerLinkColor);
-}
-
-footer a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* ======================================== */
 /* ======================================== */
 /* ======== GAME LIST */
 
-#categorieList {
-    display: flex;
-    flex-grow: 1;
-    justify-content: space-around;
-    padding: 2vh 15vw;
-}
-
-.subCategorie {
-    display: flex;
-    flex-direction: column;
-}
-
 .gameList {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
@@ -91,16 +85,17 @@ footer a:hover {
 .gameList a {
     margin: 2vh;
     padding: 2vh;
-    text-decoration: underline 5px solid var(--buttonGameColor1);
-    font-family: gameplay,sans-serif;
+    font-family: inherit;
     font-size: 1.5em;
     color: var(--buttonGameColor2);
+    background-color: var(--buttonGameColor1);
+    border: 5px solid transparent;
+    text-decoration: none;
+    min-width: 15vw;
 }
 
 .gameList a:hover {
-    text-decoration: 2px solid transparent;
-    color: var(--buttonGameColor2);
-    background-color: var(--buttonGameColor1);
+    border: 5px solid var(--buttonGameColor2);
 }
 
 /* ======================================== */
@@ -120,8 +115,16 @@ footer a:hover {
         outline: none !important;
     }
 
-    #content {
+    #container {
         flex-direction: column;
         justify-content: flex-start;
+    }
+
+    #app {
+        display: unset;
+    }
+
+    .gameList a {
+        min-width: 80vw;
     }
 }

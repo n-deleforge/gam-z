@@ -2,58 +2,41 @@
 // =================================================
 // ============ SETTINGS
 
-let gameTable; let casesList; let player = rand(1,2);
-const GRID = 3;
-const COLOR_PLAYER1 = getVariableCSS("--ticTacToeColor1");
-const COLOR_PLAYER2 = getVariableCSS("--ticTacToeColor2");
+let GAME_TABLE; let LIST_CASES; let LAST; let CURRENT_PLAYER = rand(1, 2);
+const _GRID = 3;
+const _COLOR_PLAYER1 = getVariableCSS("--ticTacToeColor1");
+const _COLOR_PLAYER2 = getVariableCSS("--ticTacToeColor2");
 
 // =================================================
 // =================================================
 // ============ MAIN
 
-// ===> Quit game
-get("#quit").addEventListener("click", function() { 
-  document.location.href="https://nicolas-deleforge.fr/apps/gamz";
-});
-
-// ===> Start game
-get("#game").addEventListener("click", function() {
-  get("~nav").style.display = "flex";
+// ===> Events on the buttons
+get("#quit").addEventListener("click", () => { document.location.href = _BACK_LINK; });
+get("#reload").addEventListener("click", () => { document.location.reload(); });
+get("#game").addEventListener("click", () => {
+  get("#player").style.display = "flex";
   get("#game").style.display = "none";
   get("#quit").style.display = "none";
-
-  displayPlayer(false);
+  checkPlayer();
   createGame();
 });
 
 // ===> The main game function
-function play(cell, array, symbol) {
-  if (array[cell] == " ") {
-    // Play sound and update the display
+function play(cell, symbol) {
+  LAST = cell;
+
+  // Check if the case is empty
+  if (GAME_TABLE[LAST] == " ") {
     get("#writing").play();
-    array[cell] = symbol;
-    for (let cell = 0; cell < GRID * GRID; cell++) {
-      casesList[cell].innerHTML = array[cell];
+    GAME_TABLE[LAST] = symbol;
+    for (let i = 0; i < _GRID * _GRID; i++) {
+      LIST_CASES[i].innerHTML = GAME_TABLE[i];
     }
 
-    // If the game is over : check victory or draw
-    if (victory(gameTable, cell) || gameTable.indexOf(" ") == -1) {
-      get("#containerPopup").style.display = "flex";
-      get("#reload").addEventListener("click", function() { location.reload() });
-
-      // Check the victory
-      if (victory(gameTable, cell)) {
-        player == 1 ? get("#popupText").style.color = COLOR_PLAYER1 : get("#popupText").style.color = COLOR_PLAYER2;
-        get("#popupText").innerHTML = CONTENT.victory_part1 + player + CONTENT.victory_part2;
-      }
-
-      // Or check the draw
-      if (gameTable.indexOf(" ") == -1 && !victory(gameTable, cell))
-        get("#popupText").innerHTML = CONTENT.draw;
-    }
-
-    // If it's not over : new turn and new player
-    displayPlayer(true)
+    // Check of the victory/draw and change player
+    checkVictory();
+    checkPlayer(true);
   }
 }
 
@@ -64,45 +47,58 @@ function play(cell, array, symbol) {
 // ===> Create the grid and add listeners
 function createGame() {
   // Creation of the grid
-  gameTable = new Array(GRID * GRID);
-  gameTable.fill(" ");
+  GAME_TABLE = new Array(_GRID * _GRID);
+  GAME_TABLE.fill(" ");
 
   // Add listeners on all cases
-  casesList = get(".case");
-  for (let cell = 0; cell < casesList.length; cell++) {
-    casesList[cell].innerHTML = "";
-    casesList[cell].addEventListener("click", function () { 
-      play(cell, gameTable, drawPawn()); 
-    });
+  LIST_CASES = get(".case");
+  for (let i = 0; i < LIST_CASES.length; i++) {
+    LIST_CASES[i].innerHTML = "";
+    LIST_CASES[i].addEventListener("click", () => { play(i, drawPawn()); });
   }
 }
 
 // ===> Determine the pawn of the player
 function drawPawn() {
-  let pawn = player == 1 ? '<span class="tic">X</span>' : '<span class="tac">O</span>';
+  let pawn = CURRENT_PLAYER == 1 ? '<span class="tic">X</span>' : '<span class="tac">O</span>';
   return pawn;
 }
 
-// ===> Display the player and change player
-function displayPlayer(newPlayer) {
-  if (newPlayer == true) player == 1 ? player = 2 : player = 1;
+// ===> Check the player
+function checkPlayer(newPlayer = false) {
+  if (newPlayer == true) CURRENT_PLAYER == 1 ? CURRENT_PLAYER = 2 : CURRENT_PLAYER = 1;
 
-  player == 1 ? get("#player").style.color = COLOR_PLAYER1 : get("#player").style.color = COLOR_PLAYER2;
-  get("#player").innerHTML = CONTENT.turn_part1 + player + CONTENT.turn_part2;
+  get("#player").style.color = CURRENT_PLAYER == 1 ?  _COLOR_PLAYER1 :  _COLOR_PLAYER2;
+  get("#player").innerHTML = _CONTENT.turn_part1 + CURRENT_PLAYER + _CONTENT.turn_part2;
 }
 
-// ===> Check if there is a victory
-function victory(array, lastPosition) {
-  let combo = array[lastPosition];
+// ===> Check victory or draw
+function checkVictory() {
+  // Check victory
+  let existingCombo = GAME_TABLE[LAST];
+  if ((GAME_TABLE[0] == existingCombo && GAME_TABLE[1] == existingCombo && GAME_TABLE[2] == existingCombo) ||
+      (GAME_TABLE[3] == existingCombo && GAME_TABLE[4] == existingCombo && GAME_TABLE[5] == existingCombo) ||
+      (GAME_TABLE[6] == existingCombo && GAME_TABLE[7] == existingCombo && GAME_TABLE[8] == existingCombo) ||
+      (GAME_TABLE[0] == existingCombo && GAME_TABLE[3] == existingCombo && GAME_TABLE[6] == existingCombo) ||
+      (GAME_TABLE[1] == existingCombo && GAME_TABLE[4] == existingCombo && GAME_TABLE[7] == existingCombo) ||
+      (GAME_TABLE[2] == existingCombo && GAME_TABLE[5] == existingCombo && GAME_TABLE[8] == existingCombo) ||
+      (GAME_TABLE[0] == existingCombo && GAME_TABLE[4] == existingCombo && GAME_TABLE[8] == existingCombo) ||
+      (GAME_TABLE[2] == existingCombo && GAME_TABLE[4] == existingCombo && GAME_TABLE[6] == existingCombo)) {
+      get("#tab").style.display = "none";
+      get("#player").style.display = "none";
+      get("#results").style.display = "flex";
+      get("#reload").style.display = "block";
+      
+      CURRENT_PLAYER == 1 ? get("#resultsText").style.color = _COLOR_PLAYER1 : get("#resultsText").style.color = _COLOR_PLAYER2;
+      get("#resultsText").innerHTML = _CONTENT.victory_part1 + CURRENT_PLAYER + _CONTENT.victory_part2;
+  }
 
-  if ((array[0] == combo && array[1] == combo && array[2] == combo) ||
-      (array[3] == combo && array[4] == combo && array[5] == combo) ||
-      (array[6] == combo && array[7] == combo && array[8] == combo) ||
-      (array[0] == combo && array[3] == combo && array[6] == combo) ||
-      (array[1] == combo && array[4] == combo && array[7] == combo) ||
-      (array[2] == combo && array[5] == combo && array[8] == combo) ||
-      (array[0] == combo && array[4] == combo && array[8] == combo) ||
-      (array[2] == combo && array[4] == combo && array[6] == combo))
-    return true;
-  return false;
+  // Check draw
+  else if (GAME_TABLE.indexOf(" ") == -1) {
+    get("#tab").style.display = "none";
+    get("#player").style.display = "none";
+    get("#results").style.display = "flex";
+    get("#reload").style.display = "block";
+    get("#resultsText").innerHTML = _CONTENT.draw;
+  }
 }
