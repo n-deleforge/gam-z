@@ -1,6 +1,6 @@
 # Gam'z
 
-> Version 1.2 :memo:  
+> Version 1.3 :memo:  
 > An application which group several little games as Tic Tac Toe.
 
 ## How to use it ?
