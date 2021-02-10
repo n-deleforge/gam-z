@@ -1,93 +1,132 @@
 // =================================================
 // =================================================
+// ============ SERVICE WORKER
+
+"serviceWorker" in navigator && window.addEventListener ("load", function() {navigator.serviceWorker.register("serviceWorker.js")});
+
+// =================================================
+// =================================================
 // ============ CORE VARIABLES
 
-let FRENCH; let english;
 const _VERSION = 1.3;
 const _GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/gam-z\">GitHub</a>";
 const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
-const _CURRENT_PAGE = document.currentScript.src.split("?")[1];
 const _MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 const _BACK_LINK = "https://nicolas-deleforge.fr/my-apps/gamz/";
+const FRENCH = {
+    // Main
+    'links': "Disponible sur " + _GITHUB + " (v " + _VERSION + ")<br />Heberge sur " + _HOME,
+    'classicGame1': "Morpion",
+    'classicGame2': "Le pendu",
+    'classicGame3': "Memory",
+    // All games
+    'play': "Jouer",
+    'quit': "Quitter",
+    'reload': "Recommencer",
+    'cheat': "Solution",
+    'bestScore': "Meilleur score",
+    'lastScore': "Dernier score",
+    'win': "Victoire(s)",
+    'lose': "Défaite(s)",
+    // TicTacToe
+    'tictactoe_turn_part1': "C'est au tour du joueur ",
+    'tictactoe_turn_part2': "",
+    'tictactoe_win_part1': "Victoire du joueur ",
+    'tictactoe_win_part2': " 😁",
+    'tictactoe_draw': "Égalité 😱",
+    'tictactoe_games': "Nombre de parties : ",
+    // Hangman
+    'hangman_lastTry': "Plus qu'un essai !",
+    'hangman_try': " essais restants",
+    'hangman_lost': "Dommage, vous avez perdu !<br />Le mot à trouver était : ",
+    'hangman_win_part1': "Bien joué !<br />Vous avez fait ",
+    'hangman_win_part2': " erreurs",
+    'hangman_win_part3': "Votre score est de ",
+    'hangman_win_part4': " points.",
+    // Memory
+    "memory_nbClick": "Nombre de clics : ",
+    'memory_nbFound': "Nombre de paires : ",
+    'memory_pathPicture': "assets/images/memory/",
+    'memory_win_part1': "Bravo !",
+    'memory_win_part2': "Tu as fais ",
+    'memory_win_part3': " clics, ton score est de ",
+    'memory_win_part4': " points.",
+};
+const ENGLISH = {
+    // Main
+    'links': "Available on " + _GITHUB + " (v " + _VERSION + ")<br />Hosted on " + _HOME,
+    'classicGame1': "Tic tac toe",
+    'classicGame2': "Hangman",
+    'classicGame3': "Memory",
+    // All games
+    'play': "Play",
+    'quit': "Quit",
+    'reload': "Restart",
+    'cheat': "Cheat",
+    'bestScore' : "Best score",
+    'lastScore' : "Last score",
+    'win' : "Win",
+    'lose' : "Lose",
+    // TicTacToe
+    'tictactoe_turn_part1': "Player ",
+    'tictactoe_turn_part2': " turn",
+    'tictactoe_win_part1': "Player ",
+    'tictactoe_win_part2': " won 😁",
+    'tictactoe_draw': "Draw 😱",
+    'tictactoe_games' : "Number of games : ",
+    // Hangman
+    'hangman_lastTry' : "One try left !",
+    'hangman_try' : " tries left",
+    'hangman_lost' : "Too bad, you have lost.<br />The word to find was : ",
+    'hangman_win_part1' : "Good game !<br />You did ",
+    "hangman_win_part2" : " errors",
+    'hangman_win_part3': "Your score is ",
+    'hangman_win_part4': " points.",
+    // Memory
+    "memory_nbClick" : "Number of click : ",
+    'memory_nbFound' : "Number of pairs : ",
+    'memory_pathPicture' : "assets/images/memory/",
+    'memory_win_part1' : "Congrats !",
+    'memory_win_part2' : "You made ",
+    'memory_win_part3' : " clicks, your score is ",
+    'memory_win_part4' : " points.",
+}
 
 // =================================================
 // =================================================
 // ============ CORE INITIALISATION
 
-// ===> Correct the bug with viewport on mobile
+// Correct the bug with viewport on mobile
 if (_MOBILE) get("#container").style.minHeight = window.innerHeight + 'px';
 
-// ===> According the page, choose the correct array of words
-switch (_CURRENT_PAGE) {  
-    case "main": // Main screen
-        FRENCH = {
-            'links': "Disponible sur " + _GITHUB + " (v " + _VERSION + ")<br />Heberge sur " + _HOME,
-            'classicGame1': "Morpion",
-            'classicGame2': "Le pendu"
-        };
-        ENGLISH = {
-            'links': "Available on " + _GITHUB + " (v " + _VERSION + ")<br />Hosted on " + _HOME,
-            'classicGame1': "Tic tac toe",
-            'classicGame2': "Hangman"
-        };
-        break;
-    case "tictactoe": // Game : Tic Tac Toe
-        FRENCH = {
-            'game': "Jouer",
-            'quit': "Quitter",
-            'reload': "Recommencer",
-            'turn_part1': "C'est au tour du joueur ",
-            'turn_part2': "",
-            'victory_part1': "Victoire du joueur ",
-            'victory_part2': " 😁",
-            'draw': "Égalité 😱"
-        };
-        ENGLISH = {
-            'game': "Play",
-            'quit': "Quit",
-            'reload': "Restart",
-            'turn_part1': "Player ",
-            'turn_part2': " turn",
-            'victory_part1': "Player ",
-            'victory_part2': " won 😁",
-            'draw': "Draw 😱"
-        };
-        break;
-    case "hangman":  // Game : Hangman
-        FRENCH = {
-            'play': "Jouer",
-            'quit': "Quitter",
-            'reload': "Recommencer",
-            'letter': "Choissisez une lettre",
-            'error': " n'est pas une lettre correcte.",
-            'lastTry': "Plus qu'un essai !",
-            'try': " essais restants",
-            'lost': "Dommage, vous avez perdu !<br />Le mot à trouver était : ",
-            'win_part1': "Bien joué !<br />Vous avez fait ",
-            "win_part2": " erreurs"
-        };
-        ENGLISH = {
-            'play' : "Play",
-            'quit' : "Quit",
-            'reload': "Restart",
-            'letter' : "Choose a letter",
-            'error' : " is not a correct letter.",
-            'lastTry' : "One try left !",
-            'try' : " tries left",
-            'lost' : "Too bad, you have lost.<br />The word to find was : ",
-            'win_part1' : "Good game !<br />You did ",
-            "win_part2" : " errors"
-        };
-        break;
-}
+// Create data game or parse it if existing
+if (!storage("get", "GAMZ-save")) {
+    GAME = {
+        'tictactoe' : {
+            "games" : 0
+        },
+        'hangman' : {
+            "bestScore" : 0,
+            "lastScore" : 0,
+            "win": 0,
+            "lose" : 0
+        },
+        'memory' : {
+            "bestScore" : 0,
+            "lastScore" : 0
+        }
+    }
 
-// ===> Determine the language of the app
+    storage("set", "GAMZ-save", JSON.stringify(GAME));
+} else GAME = JSON.parse(storage("get", "GAMZ-save"))
+
+// Determine the language of the app
 const _CONTENT = navigator.language == "fr" || navigator.language == "fr-FR" ? FRENCH : ENGLISH;
+get('#manifest').href = navigator.language == "fr" || navigator.language == "fr-FR" ? "french.webmanifest" : "english.webmanifest";
+
 let names = Object.keys(_CONTENT);
 let values = Object.values(_CONTENT);
 
 for (let i = 0; i < names.length; i++) {
-    if (get("#" + names[i])) {
-        get("#" + names[i]).innerHTML = values[i];
-    }
+    if (get("#" + names[i])) get("#" + names[i]).innerHTML = values[i];
 }

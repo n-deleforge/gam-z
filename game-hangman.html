@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gam'z</title>
-    <link rel="stylesheet" href="assets/css/hangman.min.css">
+    <link rel="stylesheet" href="assets/css/hangman.min.css?v=1.31">
+    <link rel="manifest" id="manifest">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 </head>
 
@@ -13,7 +14,9 @@
     <div id="container">
         <img id="header" src="assets/images/hangman-start.png">
 
-        <div id="gameScreen">
+        <p id="results"></p>
+
+        <div id="game">
             <div id="hangman"></div>
             <div id="guess"></div>
             <div id="keyboard"></div>
@@ -26,9 +29,8 @@
         </div>
     </div>
 
-
-    <!-- ADD LITTLE JS HERE -->
-    <script src="assets/js/core.min.js?hangman"></script>
-    <script src="assets/js/hangman.min.js"></script>
+    <script src="../../libraries/littleJS.min.js"></script>
+    <script src="assets/js/core.min.js?v=1.31"></script>
+    <script src="assets/js/hangman.min.js?v=1.31"></script>
 </body>
 </html>

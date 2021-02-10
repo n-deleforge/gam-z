@@ -28,7 +28,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-    font-family: dk_lemon_yellow;
+    font-family: dk_lemon_yellow, sans-serif;
     color: var(--mainColor);
     background-color: var(--background);
 }
@@ -43,7 +43,7 @@ body {
 /* ======================================== */
 /* ======== GAME */
 
-#tab,
+#game,
 #results {
     display: flex;
     flex-direction: column;
@@ -61,7 +61,6 @@ body {
 }
 
 #results {
-    display: none;
     font-size: 3em;
 }
 

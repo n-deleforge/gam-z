@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gam'z</title>
+    <link rel="stylesheet" href="assets/css/memory.min.css?v=1.31">
+    <link rel="manifest" id="manifest">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="container">
+        <div id="topBar">
+            <div id="click"></div>
+            <div id="found"></div>
+        </div>
+
+        <div id="game">
+            <div class="line">
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+                <img class="card" src="assets/images/memory/cute.png" alt="" />
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+            </div>
+            <div class="line">
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+                <img class="card" src="assets/images/memory/tongue.png" alt="" />
+            </div>
+            <div class="line">
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+            </div>
+            <div class="line">
+                <img class="card found" src="assets/images/memory/love.png" alt="" />
+                <img class="card found" src="assets/images/memory/love.png" alt="" />
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+                <img class="card" src="assets/images/memory/recto.png" alt="" />
+            </div>
+        </div>
+
+        <p id="results"></p>
+
+        <p id="listButtons">
+            <button id="play"></button>
+            <button id="quit"></button>
+            <button id="reload"></button>
+            <button id="cheat"></button>
+        </p>
+    </div>
+
+    <!-- SOUNDS -->
+    <audio id="flip">
+        <source src="assets/sounds/memory-flip.mp3" prelopad type="audio/mpeg">
+    </audio>
+    <!-- // SOUNDS -->
+
+    <script src="../../libraries/littleJS.min.js"></script>
+    <script src="assets/js/core.min.js?v=1.31"></script>
+    <script src="assets/js/memory.min.js?v=1.31"></script>
+</body>
+</html>

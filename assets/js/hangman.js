@@ -35,23 +35,21 @@ const _WORDS = [
 // =================================================
 // ============ MAIN 
 
-// ===> Zvents on the buttons
+/**
+ * Initialize the game : display score and add events on buttons
+ **/
+
+generateScore("display");
 get("#reload").addEventListener("click", () => { location.reload(); });
 get("#quit").addEventListener("click", () => { document.location.href = _BACK_LINK; });
-get("#play").addEventListener("click", function() { 
-    WORD_DATA = chooseWord(); 
-    WORD_STRING = WORD_DATA[0];
-    WORD_ARRAY= WORD_DATA[1];
+get("#play").addEventListener("click", startGame);
 
-    generateKeyboard();
-    updateGame();
-    get("#header").style.display = "none";
-    get("#play").style.display = "none";
-    get("#quit").style.display = "none";
-    get("#gameScreen").style.display = "flex";
-});
 
-// ===> The main game function
+/**
+ * The main game function which check if the letter is correct or not and call the updateGame function
+ * @param {string} letterChoosen the letter choosen which is represented by buttons in the virtual keyboard
+ **/
+
 function play(letterChoosen) {
     // Check if it's a correct letter
     let positions = [];
@@ -64,14 +62,14 @@ function play(letterChoosen) {
         for (i = 0; i < positions.length; i++) {
             WORD_ARRAY[positions[i]] = letterChoosen;
         }
-        get("#" + letterChoosen).style.background = getVariableCSS("--correctLetter");
+        get("#" + letterChoosen).style.background = getVariableCSS("correctLetter");
     }
     
     //Or, if the letter is incorrect
     else {
         ERROR++;
         navigator.vibrate('300');
-        get("#" + letterChoosen).style.background = getVariableCSS("--incorrectLetter");
+        get("#" + letterChoosen).style.background = getVariableCSS("incorrectLetter");
     }
 
     // In any cases, disable the letter
@@ -79,11 +77,29 @@ function play(letterChoosen) {
     updateGame();
 }
 
-// =================================================
-// =================================================
-// ============ GAME ASIDE
 
-//  ===> Update the display, check errors and victory
+/**
+ * Start the game in calling the chooseWord function and display the game screen
+ **/
+
+function startGame() {
+    WORD_DATA = chooseWord(); 
+    WORD_STRING = WORD_DATA[0];
+    WORD_ARRAY= WORD_DATA[1];
+
+    generateKeyboard();
+    updateGame();
+    get("#header").style.display = "none";
+    get("#results").style.display = "none";
+    get("#play").style.display = "none";
+    get("#quit").style.display = "none";
+    get("#game").style.display = "flex";
+}
+
+/**
+ * Each turn update the game, counting the errors and checking the win or the loss
+ **/
+
 function updateGame() {
     // Transform the word into underscore
     let wordAsUnderscore = "";
@@ -95,27 +111,37 @@ function updateGame() {
     // Error count
     if (MAX_ERROR == ERROR + 1) {
         get('#hangman').style.color = "red";
-        get('#hangman').innerHTML = _CONTENT.lastTry;
+        get('#hangman').innerHTML = _CONTENT.hangman_lastTry;
     }
-    else get('#hangman').innerHTML = (MAX_ERROR - ERROR) + _CONTENT.try;
+    else get('#hangman').innerHTML = (MAX_ERROR - ERROR) + _CONTENT.hangman_try;
 
-    // Defeat
+    // Lose
     if (ERROR == MAX_ERROR) {
-        get('#hangman').innerHTML = _CONTENT.lost + WORD_STRING;
+        generateScore("lose");
+
+        get('#hangman').style.display = "none";
+        get('#guess').innerHTML = _CONTENT.hangman_lost + WORD_STRING;
         get('#keyboard').style.display = "none";
         get('#reload').style.display = "block";
     }
 
-    // Victory
+    // Win
     else if (WORD_ARRAY.indexOf("_") == -1) {
-        get('#hangman').style.color = "green";
-        get('#hangman').innerHTML = _CONTENT.win_part1 + ERROR + _CONTENT.win_part2;
+        generateScore("win");
+
+        get('#hangman').style.display = "none";
+        get('#guess').innerHTML = "<p>" + _CONTENT.hangman_win_part1 + ERROR + _CONTENT.hangman_win_part2 + "</p>";
+        get('#guess').innerHTML += "<p>" + _CONTENT.hangman_win_part3+ GAME.hangman.lastScore + _CONTENT.hangman_win_part4 + "</p>";
         get('#keyboard').style.display = "none";
         get('#reload').style.display = "block";
     }
 }
 
-// ===> Choose randomly a word in an array
+/**
+ * Choose randomly a word in the list
+ * @return {array} the word as a string, the word as an array fill with "_"
+ **/
+
 function chooseWord() {
     // Word as a string
     let nb = rand(0, _WORDS.length);
@@ -128,7 +154,10 @@ function chooseWord() {
     return [wordString, wordArray];
 }
 
-// ===> Generate a keyboard
+/**
+ * Generate and display a virtual keyboard
+ **/
+
 function generateKeyboard() {
     for (let i = 0; i < _LETTERS.length; i ++) {
         let elem = document.createElement("button");
@@ -139,3 +168,26 @@ function generateKeyboard() {
         get("#keyboard").appendChild(elem);
     }
 }
+
+/**
+ * Display or generate score and save it in the local storage
+ * @param {string} mode "display" to only display the score or "win/lose" to generate and save the score in local storage
+ **/
+
+function generateScore(mode) {
+    // At the start
+    if (mode == "display") {
+        get("#results").innerHTML = _CONTENT.bestScore + " : " +  GAME.hangman.bestScore + " / " + _CONTENT.lastScore + " : " +  GAME.hangman.lastScore;
+        get("#results").innerHTML += "<br />" + _CONTENT.win + " : " + GAME.hangman.win + " / " + _CONTENT.lose + " : " +  GAME.hangman.lose;
+    } 
+    
+    // At the end of the game
+    else {
+        let score = (MAX_ERROR - ERROR) * 10;
+        GAME.hangman.lastScore = score;
+        if (score > GAME.hangman.bestScore) GAME.hangman.bestScore = score;
+        mode == "win" ? GAME.hangman.win++ : GAME.hangman.lose++;
+
+        storage("set", "GAMZ-save", JSON.stringify(GAME));
+    }
+} 
