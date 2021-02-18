@@ -7,7 +7,7 @@
 
 You can try the app : https://nicolas-deleforge.fr/apps/gamz/  
 Or download it : https://github.com/n-deleforge/gamz/archive/main.zip  
-Or clone the git : ```git clone https://github.com/n-deleforge/gamez.git```
+Or clone the git : ```git clone https://github.com/n-deleforge/gamz.git```
 
 # Note for self-host
 
