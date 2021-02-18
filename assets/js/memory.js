@@ -16,7 +16,7 @@ const PICTURES = ["cute", "cute", "glasses", "glasses", "love", "love", "sad", "
  * Initialize the game : display score and add events on buttons
  **/
 
-get("#results").innerHTML = _CONTENT.bestScore + " " + GAME.memory.bestScore + " / " + _CONTENT.lastScore + " " + GAME.memory.lastScore ;
+get("#results").innerHTML = _CONTENT.bestScore + " : " + GAME.memory.bestScore + " / " + _CONTENT.lastScore + " : " + GAME.memory.lastScore ;
 get("#reload").addEventListener("click", () => { location.reload() });
 get("#quit").addEventListener("click", () => { document.location.href = _BACK_LINK; });
 get("#cheat").addEventListener("click", cheat);
