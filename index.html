@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gam'z</title>
-    <link rel="stylesheet" href="assets/css/main.min.css?v=1.31">
+    <link rel="stylesheet" href="assets/css/main.css?v1.311">
     <link rel="manifest" id="manifest">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 </head>
@@ -15,17 +15,24 @@
         <header>Gam'z</header>
 
         <div id="app">
+            <h1 id="classicGameTitle"></h1>
             <div class="gameList">
                 <a href="game-tictactoe.html" id="classicGame1"></a>
                 <a href="game-hangman.html" id="classicGame2"></a>
                 <a href="game-memory.html" id="classicGame3"></a>
             </div>
+
+            <h1 id="inspiredGameTitle"></h1>
+            <div class="gameList">
+                <a id="inspiredGame1"></a>
+            </div>
         </div>
 
+        <div id="void"></div>
         <div id="links"></div>
     </div>
 
     <script src="../../libraries/littleJS.min.js"></script>
-    <script src="assets/js/core.min.js?v=1.31"></script>
+    <script src="assets/js/core.min.js?v1.311"></script>
 </body>
 </html>

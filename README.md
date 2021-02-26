@@ -11,7 +11,7 @@ Or clone the git : ```git clone https://github.com/n-deleforge/gamz.git```
 
 # Note for self-host
 
-If you download or clone the project to host it yourself, then you'll need [**Little JS**](https://github.com/n-deleforge/littleJS) at the line 28 of `index.html`, at the line 32 of `game-hangman.html`, at the line 63 of `game-memory.html`, at the line 50 of `game-tictactoe.html`. Also, I do not upload the web manifest and the service worker on Github but they are still present at the line 5 and 125 of `core.js`.
+If you download or clone the project to host it yourself, then you'll need [**Little JS**](https://github.com/n-deleforge/littleJS) at the line 28 of `index.html`, at the line 32 of `game-hangman.html`, at the line 63 of `game-memory.html`, at the line 50 of `game-tictactoe.html`. Also, I do not upload the web manifest and the service worker on Github but they are still present at the line 5 and 135 of `core.js`.
 
 # Changelog
  
