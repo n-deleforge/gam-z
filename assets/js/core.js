@@ -8,23 +8,23 @@
 // =================================================
 // ============ CORE VARIABLES
 
-const _VERSION = 1.3;
+const _VERSION = 1.4;
 const _GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/gam-z\">GitHub</a>";
 const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
 const _MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 const _BACK_LINK = "https://nicolas-deleforge.fr/my-apps/gamz/";
 const FRENCH = {
     // Main
-    'links': "Disponible sur " + _GITHUB + " (v " + _VERSION + ")<br />Heberge sur " + _HOME,
+    'footer': "Disponible sur " + _GITHUB + " (v " + _VERSION + ")<br />Heberge sur " + _HOME,
     'classicGameTitle': "Classique",
-    'classicGame1': "Morpion",
-    'classicGame2': "Le pendu",
-    'classicGame3': "Memory",
+    'tictactoe': "Morpion",
+    'hangman': "Le pendu",
+    'memory': "Memory",
     'inspiredGameTitle': "Original",
     'inspiredGame1' : "Bientot",
     // All games
     'play': "Jouer",
-    'quit': "Quitter",
+    'back': "Retour",
     'reload': "Recommencer",
     'cheat': "Solution",
     'bestScore': "Meilleur score",
@@ -57,7 +57,7 @@ const FRENCH = {
 };
 const ENGLISH = {
     // Main
-    'links': "Available on " + _GITHUB + " (v " + _VERSION + ")<br />Hosted on " + _HOME,
+    'footer': "Available on " + _GITHUB + " (v " + _VERSION + ")<br />Hosted on " + _HOME,
     'classicGameTitle': "Classic",
     'classicGame1': "Tic tac toe",
     'classicGame2': "Hangman",
@@ -66,7 +66,7 @@ const ENGLISH = {
     'inspiredGame1' : "Soon",
     // All games
     'play': "Play",
-    'quit': "Quit",
+    'back': "Back",
     'reload': "Restart",
     'cheat': "Cheat",
     'bestScore' : "Best score",
@@ -113,9 +113,7 @@ if (!storage("get", "GAMZ-save")) {
         },
         'hangman' : {
             "bestScore" : 0,
-            "lastScore" : 0,
             "win": 0,
-            "lose" : 0
         },
         'memory' : {
             "bestScore" : 0,

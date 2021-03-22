@@ -4,20 +4,19 @@
 
 let GAME_TABLE; let LIST_CASES; let LAST; let CURRENT_PLAYER = rand(1, 2);
 const _GRID = 3;
-const _COLOR_PLAYER1 = getVariableCSS("ticTacToeColor1");
-const _COLOR_PLAYER2 = getVariableCSS("ticTacToeColor2");
+const _COLOR_PLAYER1 = getVariableCSS("tttColor1");
+const _COLOR_PLAYER2 = getVariableCSS("tttColor2");
 
 // =================================================
 // =================================================
 // ============ MAIN
 
 /**
- * Initialize the game : display score and add events on buttons
+ * Initialize the game : modify header and add events on buttons
  **/
 
-get("#results").innerHTML = _CONTENT.tictactoe_games + GAME.tictactoe.games;
+get("~header").innerHTML = "Gam'z ~ " + _CONTENT.tictactoe;
 get("#reload").addEventListener("click", () => { document.location.reload(); });
-get("#quit").addEventListener("click", () => { document.location.href = _BACK_LINK; });
 get("#play").addEventListener("click", createGame);
 
 /**
@@ -38,9 +37,8 @@ function play(cell) {
       LIST_CASES[i].innerHTML = GAME_TABLE[i];
     }
 
-    // Check of the victory/draw and change player
+    // Check of the victory/draw
     checkVictory();
-    checkPlayer(true);
   }
 }
 
@@ -50,10 +48,9 @@ function play(cell) {
 
 function createGame() {
   // Update the display
-  get("#player").style.display = "flex";
-  get("#results").style.display = "none";
+  get("#tttPlayer").style.display = "flex";
+  get("#gameList").style.display = "none";
   get("#play").style.display = "none";
-  get("#quit").style.display = "none";
   checkPlayer();
 
   // Creation of the grid
@@ -61,7 +58,7 @@ function createGame() {
   GAME_TABLE.fill(" ");
 
   // Add listeners on all cases
-  LIST_CASES = get(".case");
+  LIST_CASES = get(".tttCase");
   for (let i = 0; i < LIST_CASES.length; i++) {
     LIST_CASES[i].innerHTML = "";
     LIST_CASES[i].addEventListener("click", () => { play(i); });
@@ -76,8 +73,8 @@ function createGame() {
 function checkPlayer(newPlayer = false) {
   if (newPlayer == true) CURRENT_PLAYER == 1 ? CURRENT_PLAYER = 2 : CURRENT_PLAYER = 1;
 
-  get("#player").style.color = CURRENT_PLAYER == 1 ?  _COLOR_PLAYER1 :  _COLOR_PLAYER2;
-  get("#player").innerHTML = _CONTENT.tictactoe_turn_part1 + CURRENT_PLAYER + _CONTENT.tictactoe_turn_part2;
+  get("#tttPlayer").style.color = CURRENT_PLAYER == 1 ?  _COLOR_PLAYER1 :  _COLOR_PLAYER2;
+  get("#tttPlayer").innerHTML = _CONTENT.tictactoe_turn_part1 + CURRENT_PLAYER + _CONTENT.tictactoe_turn_part2;
 }
 
 /**
@@ -97,26 +94,28 @@ function checkVictory() {
       (GAME_TABLE[2] == existingCombo && GAME_TABLE[4] == existingCombo && GAME_TABLE[6] == existingCombo)) {
 
       endGame();
-      CURRENT_PLAYER == 1 ? get("#results").style.color = _COLOR_PLAYER1 : get("#results").style.color = _COLOR_PLAYER2;
-      get("#results").innerHTML = _CONTENT.tictactoe_win_part1 + CURRENT_PLAYER + _CONTENT.tictactoe_win_part2;
+      CURRENT_PLAYER == 1 ? get("#tttPlayer").style.color = _COLOR_PLAYER1 : get("#tttPlayer").style.color = _COLOR_PLAYER2;
+      get("#tttPlayer").innerHTML = _CONTENT.tictactoe_win_part1 + CURRENT_PLAYER + _CONTENT.tictactoe_win_part2;
   }
 
   // Check draw
   else if (GAME_TABLE.indexOf(" ") == -1) {
     endGame();
-    get("#results").innerHTML = _CONTENT.tictactoe_draw;
+    get("#tttPlayer").innerHTML = _CONTENT.tictactoe_draw;
   }
+
+  // Change player if no draw or victory
+  else checkPlayer(true);
 }
 
 /**
- * Change the display for the results and save the number of games
+ * Change the display for the #tttResults and save the number of games
  **/
 
 function endGame() {
-  get("#game").style.display = "none";
-  get("#player").style.display = "none";
+  get("#tictactoeBoard").style.display = "none";
+  get("#gameList").style.display = "flex";
   get("#reload").style.display = "block";
-  get("#results").style.display = "flex";
 
   GAME.tictactoe.games ++;
   storage("set", "GAMZ-save", JSON.stringify(GAME));

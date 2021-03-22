@@ -5,7 +5,7 @@
 const _NB_TO_WIN = 8;
 const _NB_PER_LINE = 4;
 let NB_CLICK = 0; let NB_FOUND = 0;
-let LIST_CARDS = get(".card"); let DISPLAY_CARDS = []; let PLAYED_CARDS = [];
+let LIST_CARDS = get(".memoryCard"); let DISPLAY_CARDS = []; let PLAYED_CARDS = [];
 const PICTURES = ["cute", "cute", "glasses", "glasses", "love", "love", "sad", "sad", "shocked", "shocked", "smile", "smile", "tongue", "tongue", "wink", "wink"];
 
 // =================================================
@@ -16,11 +16,10 @@ const PICTURES = ["cute", "cute", "glasses", "glasses", "love", "love", "sad", "
  * Initialize the game : display score and add events on buttons
  **/
 
-get("#results").innerHTML = _CONTENT.bestScore + " : " + GAME.memory.bestScore + " / " + _CONTENT.lastScore + " : " + GAME.memory.lastScore ;
+ get("~header").innerHTML = "Gam'z ~ " + _CONTENT.memory;
 get("#reload").addEventListener("click", () => { location.reload() });
-get("#quit").addEventListener("click", () => { document.location.href = _BACK_LINK; });
-get("#cheat").addEventListener("click", cheat);
 get("#play").addEventListener("click", createGame);
+get("#cheat").addEventListener("click", cheat);
 
 /**
  * The main game function : check the number of played cards, check if the cards are identical and check the victory
@@ -35,7 +34,6 @@ function play(card) {
     if (PLAYED_CARDS.length < 2 && DISPLAY_CARDS[card] == 0) {
         get("#flip").play();
         NB_CLICK++;
-        get("#click").innerHTML = _CONTENT.memory_nbClick + NB_CLICK;
         
         DISPLAY_CARDS[card] = 1;
         PLAYED_CARDS.push(card);
@@ -48,7 +46,6 @@ function play(card) {
                 timeout = 0; // If found, no timeout needed
                 face = 2; // Founded
                 NB_FOUND++;
-                get("#found").innerHTML = _CONTENT.memory_nbFound + NB_FOUND;
                 
                 // And if all the cards are found
                 if (NB_FOUND == _NB_TO_WIN) endGame();
@@ -83,7 +80,7 @@ function turn(card) {
             break;
 
         case 2: // paire trouvée
-        LIST_CARDS[card].classList.add("found");
+        LIST_CARDS[card].classList.add("memoryFound");
             break;
     }
 }
@@ -95,13 +92,8 @@ function turn(card) {
 function createGame() {
     // Update the display
     get("#play").style.display = "none";
-    get("#quit").style.display = "none";
-    get("#results").style.display = "none";
     get("#cheat").style.display = "block";
     get("#reload").style.display = "block";
-    get("#topBar").style.display = "flex";
-    get("#click").innerHTML = _CONTENT.memory_nbClick + NB_CLICK;
-    get("#found").innerHTML = _CONTENT.memory_nbFound + NB_FOUND;
 
     // Create arrays and randomize the cards
     for (let i = 0; i < _NB_TO_WIN; i++) DISPLAY_CARDS.push(0, 0);
@@ -111,7 +103,7 @@ function createGame() {
     for (let i = 0; i < LIST_CARDS.length; i++) {
         LIST_CARDS[i].src = _CONTENT.memory_pathPicture + 'recto.png';
         LIST_CARDS[i].data = PICTURES[i]
-        LIST_CARDS[i].classList.remove("found"); 
+        LIST_CARDS[i].classList.remove("memoryFound"); 
         LIST_CARDS[i].addEventListener("click", () => { play(i); });
     }
 }
@@ -141,8 +133,7 @@ function endGame() {
     storage("set", "GAMZ-save", JSON.stringify(GAME));
 
     // Update the display
-    get("#topBar").style.display = "none";
     get("#cheat").style.display = "none";
-    get("#game").innerHTML = "<p>" + _CONTENT.memory_win_part1 + "</p>";
-    get("#game").innerHTML += "<p>" + _CONTENT.memory_win_part2 + NB_CLICK + _CONTENT.memory_win_part3 + score + _CONTENT.memory_win_part4 + "</p>";
+    get("#memoryBoard").innerHTML = "<p>" + _CONTENT.memory_win_part1 + "</p>";
+    get("#memoryBoard").innerHTML += "<p>" + _CONTENT.memory_win_part2 + NB_CLICK + _CONTENT.memory_win_part3 + score + _CONTENT.memory_win_part4 + "</p>";
 }

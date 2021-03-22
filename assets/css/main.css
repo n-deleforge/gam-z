@@ -8,10 +8,10 @@
     --appTitle: white;
     --appBackground: white;
     --appSubTitle: indianred;
-    --gameListBackground: #262931;
+    --homeListBackground: #262931;
     --footerLinkColor: lightcoral;
-    --buttonGameColor1: indianred;
-    --buttonGameColor2: white;
+    --homeButton1: indianred;
+    --homeButton2: white;
 }
 
 /* ======================================== */
@@ -30,7 +30,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-    font-family: gameplay,sans-serif;
+    font-family: gameplay, sans-serif;
     font-size: 1.3em;
     color: var(--mainText);
     background-color: var(--mainBackground);
@@ -40,7 +40,52 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+
+/* ======================================== */
+/* ======================================== */
+/* ======== BUTTONS */
+
+.homeList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 3vh 0;
+    background: var(--homeListBackground);
+}
+
+.homeButton {
+    margin: 0 2vh;
+    padding: 2vh;
+    min-width: 12vw;
+    border: 5px solid transparent;
     text-align: center;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 1.2em;
+    color: var(--homeButton2);
+    background-color: var(--homeButton1);
+}
+
+.homeButton:hover {
+    border: 5px solid var(--homeButton2);
+}
+
+#gameList {
+    display: flex;
+    justify-content: center;
+    padding: 2vh;
+}
+
+.gameButton {
+    width: 15vw;
+    margin: 0 2vh;
+    padding: 2vh;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-family: inherit;
+    font-size: 2em;
 }
 
 /* ======================================== */
@@ -67,9 +112,9 @@ header {
 
 #app h1 {
     display: flex;
-    justify-content: flex-start;
     position: relative;
     top: 4.5vh;
+    justify-content: flex-start;
     color: var(--appSubTitle);
 }
 
@@ -77,43 +122,16 @@ header {
     flex-grow: 1;
 }
 
-#links {
+#footer {
     padding: 2vh;
+    text-align: center;
     font-size: 0.6em;
     line-height: 1.6em;
 }
 
-#links a {
+#footer a {
     text-decoration: none;
     color: var(--footerLinkColor);
-}
-
-/* ======================================== */
-/* ======================================== */
-/* ======== GAME LIST */
-
-.gameList {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 3vh 0;
-    background: var(--gameListBackground);
-}
-
-.gameList a {
-    margin: 0 2vh;
-    padding: 2vh;
-    min-width: 12vw;
-    border: 5px solid transparent;
-    text-decoration: none;
-    font-family: inherit;
-    font-size: 1.2em;
-    color: var(--buttonGameColor2);
-    background-color: var(--buttonGameColor1);
-}
-
-.gameList a:hover {
-    border: 5px solid var(--buttonGameColor2);
 }
 
 /* ======================================== */
@@ -126,10 +144,8 @@ header {
         font-size: 1.2em;
     }
 
-    .gameList a:focus,
-    .gameList a:active,
-    footer a:focus,
-    footer a:active {
+    a:focus,
+    a:active {
         outline: none !important;
     }
 
@@ -146,7 +162,7 @@ header {
         top: 5vh;
     }
 
-    .gameList a {
+    .homeButton {
         margin: 1vh 5vw;
         min-width: 70vw;
     }

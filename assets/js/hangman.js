@@ -36,14 +36,12 @@ const _WORDS = [
 // ============ MAIN 
 
 /**
- * Initialize the game : display score and add events on buttons
+ * Initialize the game : modify header and add events on buttons
  **/
 
-generateScore("display");
+get("~header").innerHTML = "Gam'z ~ " + _CONTENT.hangman;
 get("#reload").addEventListener("click", () => { location.reload(); });
-get("#quit").addEventListener("click", () => { document.location.href = _BACK_LINK; });
 get("#play").addEventListener("click", startGame);
-
 
 /**
  * The main game function which check if the letter is correct or not and call the updateGame function
@@ -62,14 +60,14 @@ function play(letterChoosen) {
         for (i = 0; i < positions.length; i++) {
             WORD_ARRAY[positions[i]] = letterChoosen;
         }
-        get("#" + letterChoosen).style.background = getVariableCSS("correctLetter");
+        get("#" + letterChoosen).style.background = getVariableCSS("hangmanCorrectLetter");
     }
     
     //Or, if the letter is incorrect
     else {
         ERROR++;
         navigator.vibrate('300');
-        get("#" + letterChoosen).style.background = getVariableCSS("incorrectLetter");
+        get("#" + letterChoosen).style.background = getVariableCSS("hangmanIncorrectLetter");
     }
 
     // In any cases, disable the letter
@@ -89,11 +87,10 @@ function startGame() {
 
     generateKeyboard();
     updateGame();
-    get("#header").style.display = "none";
-    get("#results").style.display = "none";
+    get("#hangmanHeader").style.display = "none";
+    get("#gameList").style.display = "none";
     get("#play").style.display = "none";
-    get("#quit").style.display = "none";
-    get("#game").style.display = "flex";
+    get("#hangmanBoard").style.display = "flex";
 }
 
 /**
@@ -106,33 +103,30 @@ function updateGame() {
     for (i = 0; i < WORD_ARRAY.length; i++) {
         wordAsUnderscore += WORD_ARRAY[i] + " ";
     }
-    get('#guess').innerHTML = wordAsUnderscore.trim();
+    get('#hangmanGuess').innerHTML = wordAsUnderscore.trim();
 
     // Error count
     if (MAX_ERROR == ERROR + 1) {
-        get('#hangman').style.color = "red";
-        get('#hangman').innerHTML = _CONTENT.hangman_lastTry;
+        get('#hangmanResults').style.color = "red";
+        get('#hangmanResults').innerHTML = _CONTENT.hangman_lastTry;
     }
-    else get('#hangman').innerHTML = (MAX_ERROR - ERROR) + _CONTENT.hangman_try;
+    else get('#hangmanResults').innerHTML = (MAX_ERROR - ERROR) + _CONTENT.hangman_try;
 
     // Lose
     if (ERROR == MAX_ERROR) {
-        generateScore("lose");
-
-        get('#hangman').style.display = "none";
-        get('#guess').innerHTML = _CONTENT.hangman_lost + WORD_STRING;
-        get('#keyboard').style.display = "none";
+        get('#hangmanResults').style.display = "none";
+        get('#hangmanGuess').innerHTML = _CONTENT.hangman_lost + WORD_STRING;
+        get('#hangmanKeyboard').style.display = "none";
+        get("#gameList").style.display = "flex";
         get('#reload').style.display = "block";
     }
 
     // Win
     else if (WORD_ARRAY.indexOf("_") == -1) {
-        generateScore("win");
-
-        get('#hangman').style.display = "none";
-        get('#guess').innerHTML = "<p>" + _CONTENT.hangman_win_part1 + ERROR + _CONTENT.hangman_win_part2 + "</p>";
-        get('#guess').innerHTML += "<p>" + _CONTENT.hangman_win_part3+ GAME.hangman.lastScore + _CONTENT.hangman_win_part4 + "</p>";
-        get('#keyboard').style.display = "none";
+        get('#hangmanResults').style.display = "none";
+        get('#hangmanGuess').innerHTML = "<p>" + _CONTENT.hangman_win_part1 + ERROR + _CONTENT.hangman_win_part2 + "</p>";
+        get('#hangmanKeyboard').style.display = "none";
+        get("#gameList").style.display = "flex";
         get('#reload').style.display = "block";
     }
 }
@@ -164,30 +158,8 @@ function generateKeyboard() {
         elem.innerHTML = _LETTERS[i];
         elem.id = _LETTERS[i];
         elem.classList.add("keyboardButton");
+        elem.classList.add("gameButton");
         elem.addEventListener("click", function() { play(_LETTERS[i]) });
-        get("#keyboard").appendChild(elem);
+        get("#hangmanKeyboard").appendChild(elem);
     }
 }
-
-/**
- * Display or generate score and save it in the local storage
- * @param {string} mode "display" to only display the score or "win/lose" to generate and save the score in local storage
- **/
-
-function generateScore(mode) {
-    // At the start
-    if (mode == "display") {
-        get("#results").innerHTML = _CONTENT.bestScore + " : " +  GAME.hangman.bestScore + " / " + _CONTENT.lastScore + " : " +  GAME.hangman.lastScore;
-        get("#results").innerHTML += "<br />" + _CONTENT.win + " : " + GAME.hangman.win + " / " + _CONTENT.lose + " : " +  GAME.hangman.lose;
-    } 
-    
-    // At the end of the game
-    else {
-        let score = (MAX_ERROR - ERROR) * 10;
-        GAME.hangman.lastScore = score;
-        if (score > GAME.hangman.bestScore) GAME.hangman.bestScore = score;
-        mode == "win" ? GAME.hangman.win++ : GAME.hangman.lose++;
-
-        storage("set", "GAMZ-save", JSON.stringify(GAME));
-    }
-} 
