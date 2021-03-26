@@ -16,12 +16,11 @@ const _BACK_LINK = "https://nicolas-deleforge.fr/my-apps/gamz/";
 const FRENCH = {
     // Main
     'footer': "Disponible sur " + _GITHUB + " (v " + _VERSION + ")<br />Heberge sur " + _HOME,
-    'classicGameTitle': "Classique",
-    'tictactoe': "Morpion",
+    'onePlayerTitle': "1 joueur",
     'hangman': "Le pendu",
     'memory': "Memory",
-    'inspiredGameTitle': "Original",
-    'inspiredGame1' : "Bientot",
+    'twoPlayerTitle': "2 joueurs",
+    'tictactoe': "Morpion",
     // All games
     'play': "Jouer",
     'back': "Retour",
@@ -58,12 +57,11 @@ const FRENCH = {
 const ENGLISH = {
     // Main
     'footer': "Available on " + _GITHUB + " (v " + _VERSION + ")<br />Hosted on " + _HOME,
-    'classicGameTitle': "Classic",
-    'classicGame1': "Tic tac toe",
-    'classicGame2': "Hangman",
-    'classicGame3': "Memory",
-    'inspiredGameTitle': "Original",
-    'inspiredGame1' : "Soon",
+    'onePlayerTitle': "1 player",
+    'hangman': "Hangman",
+    'memory': "Memory",
+    'twoPlayerTitle': "2 players",
+    'tictactoe': "Tic Tac Toe",
     // All games
     'play': "Play",
     'back': "Back",

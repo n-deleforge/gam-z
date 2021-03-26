@@ -281,52 +281,52 @@ header {
     border: 2px solid var(--mainText);
 }
 
-.c1 {
+.tttC1 {
     border-top: 2px solid transparent;
     border-left: 2px solid transparent;
 }
 
-.c2 {
+.tttC2 {
     border-top: 2px solid transparent;
 }
 
-.c3 {
+.tttC3 {
     border-top: 2px solid transparent;
     border-right: 2px solid transparent;
 }
 
-.c4 {
+.tttC4 {
     border-left: 2px solid transparent;
 }
 
-.c6 {
+.tttC6 {
     border-right: 2px solid transparent;
 }
 
-.c7 {
+.tttC7 {
     border-bottom: 2px solid transparent;
     border-left: 2px solid transparent;
 }
 
-.c8 {
+.tttC8 {
     border-bottom: 2px solid transparent;
 }
 
-.c9 {
+.tttC9 {
     border-right: 2px solid transparent;
     border-bottom: 2px solid transparent;
 }
 
-.tic {
+.tttTic {
     color: var(--tttColor1);
 }
 
-.tac {
+.tttTac {
     color: var(--tttColor2);
 }
 
-.tic,
-.tac {
+.tttTic,
+.tttTac {
     font-size: 7em;
 }
 
@@ -341,8 +341,8 @@ header {
         height: 16vh;
     }
 
-    .tic,
-    .tac {
+    .tttTic,
+    .tttTac {
         font-size: 5em;
     }
 }

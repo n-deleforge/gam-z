@@ -1,19 +1,19 @@
 <div id="app" class="app-tictactoe">
     <div id="tictactoeBoard">
         <div class="tttLine">
-            <div class="tttCase c1"><span class="tic">X</span></div>
-            <div class="tttCase c2"><span class="tac">O</span></div>
-            <div class="tttCase c3"></div>
+            <div class="tttCase tttC1"><span class="tttTic">X</span></div>
+            <div class="tttCase tttC2"><span class="tttTac">O</span></div>
+            <div class="tttCase tttC3"></div>
         </div>
         <div class="tttLine">
-            <div class="tttCase c4"></div>
-            <div class="tttCase c5"><span class="tic">X</span></div>
-            <div class="tttCase c6"></div>
+            <div class="tttCase tttC4"></div>
+            <div class="tttCase tttC5"><span class="tttTic">X</span></div>
+            <div class="tttCase tttC6"></div>
         </div>
         <div class="tttLine">
-            <div class="tttCase c7"></div>
-            <div class="tttCase c8"></div>
-            <div class="tttCase c9"><span class="tac">O</span></div>
+            <div class="tttCase tttC7"></div>
+            <div class="tttCase tttC8"></div>
+            <div class="tttCase tttC9"><span class="tttTac">O</span></div>
         </div>
     </div>
 

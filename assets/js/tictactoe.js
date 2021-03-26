@@ -32,7 +32,7 @@ function play(cell) {
     get("#writing").play();
     navigator.vibrate("50");
 
-    GAME_TABLE[LAST] = CURRENT_PLAYER == 1 ? '<span class="tic">X</span>' : '<span class="tac">O</span>';
+    GAME_TABLE[LAST] = CURRENT_PLAYER == 1 ? '<span class="tttTic">X</span>' : '<span class="tttTac">O</span>';
     for (let i = 0; i < _GRID * _GRID; i++) {
       LIST_CASES[i].innerHTML = GAME_TABLE[i];
     }
