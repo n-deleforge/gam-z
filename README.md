@@ -5,15 +5,15 @@
 
 ## How to use it ?
 
-You can try the app : https://nicolas-deleforge.fr/my-apps/gamz/  
-Or download it : https://github.com/n-deleforge/gamz/archive/main.zip  
-Or clone the git : ```git clone https://github.com/n-deleforge/gamz.git```
+- You can try the app on my website : https://nicolas-deleforge.fr/my-apps/gamz/  
+- You can download the lastest release : https://github.com/n-deleforge/gam-z/releases 
+- Or you can clone the git : ```git clone https://github.com/n-deleforge/gamz.git```
 
-# Note for self-host
+## Note for self-host
 
 If you download or clone the project to host it yourself, then you'll need [**Little JS**](https://github.com/n-deleforge/littleJS) at the line 5 of `_footer.php`. Also, I do not upload the web manifest and the service worker on Github but they are still present at the line 5 and 129 of `core.js`.
 
-# Changelog
+## Changelog
 
 - 1.4 : Nothing really news about the games but the application has been kinda rewritten. I added some PHP to simplify futures updates. I cleaned CSS files a lot too. For now, scores and stats are not displayed but they are saved in localstorage anyway.
 - 1.3 : Again a big app rewriting with CSS and JS cleaning. Hangman comeback with a virtual keyboard. TicTacToe modified a bit.
