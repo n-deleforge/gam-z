@@ -118,5 +118,5 @@ function endGame() {
   get("#reload").style.display = "block";
 
   GAME.tictactoe.games ++;
-  storage("set", "GAMZ-save", JSON.stringify(GAME));
+  setStorage("GAMZ-save", JSON.stringify(GAME));
 }

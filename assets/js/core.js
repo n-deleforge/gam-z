@@ -104,7 +104,7 @@ const ENGLISH = {
 if (_MOBILE) get("#container").style.minHeight = window.innerHeight + 'px';
 
 // Create data game or parse it if existing
-if (!storage("get", "GAMZ-save")) {
+if (!getStorage("GAMZ-save")) {
     GAME = {
         'tictactoe' : {
             "games" : 0
@@ -119,8 +119,8 @@ if (!storage("get", "GAMZ-save")) {
         }
     }
 
-    storage("set", "GAMZ-save", JSON.stringify(GAME));
-} else GAME = JSON.parse(storage("get", "GAMZ-save"))
+    setStorage("GAMZ-save", JSON.stringify(GAME));
+} else GAME = JSON.parse(getStorage("GAMZ-save"))
 
 // Determine the language of the app
 const _CONTENT = navigator.language == "fr" || navigator.language == "fr-FR" ? FRENCH : ENGLISH;

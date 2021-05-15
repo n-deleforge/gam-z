@@ -67,9 +67,10 @@ header {
     right: 1vw;
     min-width: unset;
     width: auto;
-    padding: 0.5vh;
+    padding: 1vh;
     font-family: initial;
     font-size: 1em;
+    border-radius: 0;
 }
 
 #gameList {

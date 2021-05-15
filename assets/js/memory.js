@@ -130,7 +130,7 @@ function endGame() {
     let score = 116 - NB_CLICK;
     GAME.memory.lastScore = score;
     if (score > GAME.memory.bestScore) GAME.memory.bestScore = score;
-    storage("set", "GAMZ-save", JSON.stringify(GAME));
+    setStorage("GAMZ-save", JSON.stringify(GAME));
 
     // Update the display
     get("#cheat").style.display = "none";
