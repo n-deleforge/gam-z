@@ -42,9 +42,26 @@ body {
     min-height: 100vh;
 }
 
+@media(max-width:1024px) {
+    html,
+    body {
+        font-size: 1.2em;
+    }
+
+    a:focus,
+    a:active {
+        outline: none !important;
+    }
+
+    #container {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}
+
 /* ======================================== */
 /* ======================================== */
-/* ======== BUTTONS */
+/* ======== BUTTON */
 
 .homeList {
     display: flex;
@@ -86,6 +103,13 @@ body {
     text-transform: uppercase;
     font-family: inherit;
     font-size: 2em;
+}
+
+@media(max-width:1024px) {
+    .homeButton {
+        margin: 1vh 5vw;
+        min-width: 70vw;
+    }
 }
 
 /* ======================================== */
@@ -134,36 +158,12 @@ header {
     color: var(--footerLinkColor);
 }
 
-/* ======================================== */
-/* ======================================== */
-/* ======== MOBILE */
-
 @media(max-width:1024px) {
-    html,
-    body {
-        font-size: 1.2em;
-    }
-
-    a:focus,
-    a:active {
-        outline: none !important;
-    }
-
-    #container {
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-
     #app {
         margin: 0;
     }
 
     #app h1 {
         top: 5vh;
-    }
-
-    .homeButton {
-        margin: 1vh 5vw;
-        min-width: 70vw;
     }
 }
