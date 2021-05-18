@@ -10,12 +10,12 @@
 
 const _VERSION = 1.4;
 const _GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/gam-z\">GitHub</a>";
-const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">nd</a>";
+const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">NDDev</a>";
 const _MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 const _BACK_LINK = "https://nicolas-deleforge.fr/my-apps/gamz/";
 const FRENCH = {
     // Main
-    'footer': "Disponible sur " + _GITHUB + " (v " + _VERSION + ")<br />Heberge sur " + _HOME,
+    'footer': "Disponible sur " + _GITHUB + " (v " + _VERSION + ") ©  " + _HOME,
     'onePlayerTitle': "1 joueur",
     'hangman': "Le pendu",
     'memory': "Memory",
@@ -56,7 +56,7 @@ const FRENCH = {
 };
 const ENGLISH = {
     // Main
-    'footer': "Available on " + _GITHUB + " (v " + _VERSION + ")<br />Hosted on " + _HOME,
+    'footer': "Available on " + _GITHUB + " (v " + _VERSION + ") ©  " + _HOME,
     'onePlayerTitle': "1 player",
     'hangman': "Hangman",
     'memory': "Memory",
