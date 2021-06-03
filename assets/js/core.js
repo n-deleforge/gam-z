@@ -10,7 +10,7 @@
 
 const _VERSION = 1.4;
 const _GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/gam-z\">GitHub</a>";
-const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">NDDev</a>";
+const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">ForgeCode</a>";
 const _MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 const _BACK_LINK = "https://nicolas-deleforge.fr/my-apps/gamz/";
 const FRENCH = {
