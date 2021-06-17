@@ -1,5 +1,4 @@
 // =================================================
-// =================================================
 // ============ SETTINGS
 
 let GAME_TABLE; let LIST_CASES; let LAST; let CURRENT_PLAYER = rand(1, 2);
@@ -7,7 +6,6 @@ const _GRID = 3;
 const _COLOR_PLAYER1 = getVariableCSS("tttColor1");
 const _COLOR_PLAYER2 = getVariableCSS("tttColor2");
 
-// =================================================
 // =================================================
 // ============ MAIN
 

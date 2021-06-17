@@ -1,5 +1,4 @@
 // =================================================
-// =================================================
 // ============ VARIABLES
 
 const _NB_TO_WIN = 8;
@@ -8,7 +7,6 @@ let NB_CLICK = 0; let NB_FOUND = 0;
 let LIST_CARDS = get(".memoryCard"); let DISPLAY_CARDS = []; let PLAYED_CARDS = [];
 const PICTURES = ["cute", "cute", "glasses", "glasses", "love", "love", "sad", "sad", "shocked", "shocked", "smile", "smile", "tongue", "tongue", "wink", "wink"];
 
-// =================================================
 // =================================================
 // ============ MAIN
 

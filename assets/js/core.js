@@ -1,10 +1,8 @@
 // =================================================
-// =================================================
 // ============ SERVICE WORKER
 
 "serviceWorker" in navigator && window.addEventListener ("load", function() {navigator.serviceWorker.register("serviceWorker.js")});
 
-// =================================================
 // =================================================
 // ============ CORE VARIABLES
 
@@ -96,7 +94,6 @@ const ENGLISH = {
     'memory_win_part4' : " points.",
 }
 
-// =================================================
 // =================================================
 // ============ CORE INITIALISATION
 
