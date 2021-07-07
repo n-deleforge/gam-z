@@ -1,23 +1,27 @@
 /* ======================================== */
-/* ======== MAIN */
+/* ======== VARIABLES */
 
 :root {
     /* All */
-    --bodyBackground: transparent;
-    --containerBackground: black;
-    --appBackground: #262931;
-    --header: indianred;
-    --buttonColor1: black;
-    --buttonColor2: white;
+    --background-body: transparent;
+    --background-container: black;
+    --background-app: #262931;
+    --background-header: indianred;
+    --button-color-1: black;
+    --button-color-2: white;
 
     /* Hangman */
-    --hangmanCorrectLetter: lightgreen;
-    --hangmanIncorrectLetter: lightcoral;
+    --hangman-correct: lightgreen;
+    --hangman-incorrect: lightcoral;
 
     /* Tic tac toe*/
-    --tttColor1: lightskyblue;
-    --tttColor2: lightgreen;
+    --ttt-color-1: lightskyblue;
+    --ttt-color-2: lightgreen;
+    --ttt-border: white;
 }
+
+/* ======================================== */
+/* ======== MAIN */
 
 a {
     text-decoration: none;
@@ -25,18 +29,18 @@ a {
 
 html,
 body {
-    background: var(--bodyBackground);
+    background: var(--background-body);
 }
 
 #container {
     margin: 0 25vw;
-    background: var(--containerBackground);
+    background: var(--background-container);
 }
 
 header {
     padding: 2vh;
     font-size: 1.5em;
-    background: var(--header);
+    background: var(--background-header);
 }
 
 #app {
@@ -44,7 +48,7 @@ header {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: var(--appBackground);
+    background: var(--background-app);
 }
 
 #reload {
@@ -67,7 +71,6 @@ header {
     min-width: unset;
     width: auto;
     padding: 1vh;
-    font-family: initial;
     font-size: 1em;
     border-radius: 0;
 }
@@ -77,12 +80,12 @@ header {
 }
 
 .gameButton {
-    color: var(--buttonColor2);
-    background: var(--buttonColor1);
+    color: var(--button-color-2);
+    background: var(--button-color-1);
 }
 
 .gameButton:hover {
-    border: 2px solid var(--buttonColor2);
+    border: 2px solid var(--button-color-2);
 }
 
 @media(max-width:1024px) {
@@ -90,7 +93,7 @@ header {
         margin: 0;
     }
 
-    header {
+    background-header {
         font-size: 1.2em;
     }
 
@@ -127,6 +130,12 @@ header {
     justify-content: center;
     padding: 2vh;
     font-size: 2.5em;
+}
+
+#memoryBoard p:last-child {
+    padding: 0 2em;
+    text-align: justify;
+    font-size: 0.8em;
 }
 
 .memoryCard {
@@ -275,7 +284,7 @@ header {
     justify-content: center;
     width: 15vw;
     height: 23vh;
-    border: 2px solid var(--mainText);
+    border: 2px solid var(--ttt-border);
 }
 
 .tttC1 {
@@ -315,11 +324,11 @@ header {
 }
 
 .tttTic {
-    color: var(--tttColor1);
+    color: var(--ttt-color-1);
 }
 
 .tttTac {
-    color: var(--tttColor2);
+    color: var(--ttt-color-2);
 }
 
 .tttTic,

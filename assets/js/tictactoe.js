@@ -1,10 +1,10 @@
 // =================================================
 // ============ SETTINGS
 
-let GAME_TABLE; let LIST_CASES; let LAST; let CURRENT_PLAYER = rand(1, 2);
-const _GRID = 3;
-const _COLOR_PLAYER1 = getVariableCSS("tttColor1");
-const _COLOR_PLAYER2 = getVariableCSS("tttColor2");
+let gameTable; let listCases; let lastCell; let currentPlayer = rand(1, 2);
+const _grid = 3;
+const _colorPlayer1 = getVariableCSS("ttt-color-1");
+const _colorPlayer2 = getVariableCSS("ttt-color-2");
 
 // =================================================
 // ============ MAIN
@@ -13,7 +13,7 @@ const _COLOR_PLAYER2 = getVariableCSS("tttColor2");
  * Initialize the game : modify header and add events on buttons
  **/
 
-get("~header").innerHTML = "Gam'z ~ " + _CONTENT.tictactoe;
+get("~header").innerHTML = "Gam'z ~ " + _content.tictactoe;
 get("#reload").addEventListener("click", () => { document.location.reload(); });
 get("#play").addEventListener("click", createGame);
 
@@ -23,16 +23,16 @@ get("#play").addEventListener("click", createGame);
  **/
 
 function play(cell) {
-  LAST = cell;
+  lastCell = cell;
 
   // Check if the case is empty
-  if (GAME_TABLE[LAST] == " ") {
+  if (gameTable[lastCell] == " ") {
     get("#writing").play();
     navigator.vibrate("50");
 
-    GAME_TABLE[LAST] = CURRENT_PLAYER == 1 ? '<span class="tttTic">X</span>' : '<span class="tttTac">O</span>';
-    for (let i = 0; i < _GRID * _GRID; i++) {
-      LIST_CASES[i].innerHTML = GAME_TABLE[i];
+    gameTable[lastCell] = currentPlayer == 1 ? '<span class="tttTic">X</span>' : '<span class="tttTac">O</span>';
+    for (let i = 0; i < _grid * _grid; i++) {
+      listCases[i].innerHTML = gameTable[i];
     }
 
     // Check of the victory/draw
@@ -52,14 +52,14 @@ function createGame() {
   checkPlayer();
 
   // Creation of the grid
-  GAME_TABLE = new Array(_GRID * _GRID);
-  GAME_TABLE.fill(" ");
+  gameTable = new Array(_grid * _grid);
+  gameTable.fill(" ");
 
   // Add listeners on all cases
-  LIST_CASES = get(".tttCase");
-  for (let i = 0; i < LIST_CASES.length; i++) {
-    LIST_CASES[i].innerHTML = "";
-    LIST_CASES[i].addEventListener("click", () => { play(i); });
+  listCases = get(".tttCase");
+  for (let i = 0; i < listCases.length; i++) {
+    listCases[i].innerHTML = "";
+    listCases[i].addEventListener("click", () => { play(i); });
   }
 }
 
@@ -69,10 +69,10 @@ function createGame() {
  **/
 
 function checkPlayer(newPlayer = false) {
-  if (newPlayer == true) CURRENT_PLAYER == 1 ? CURRENT_PLAYER = 2 : CURRENT_PLAYER = 1;
+  if (newPlayer == true) currentPlayer == 1 ? currentPlayer = 2 : currentPlayer = 1;
 
-  get("#tttPlayer").style.color = CURRENT_PLAYER == 1 ?  _COLOR_PLAYER1 :  _COLOR_PLAYER2;
-  get("#tttPlayer").innerHTML = _CONTENT.tictactoe_turn_part1 + CURRENT_PLAYER + _CONTENT.tictactoe_turn_part2;
+  get("#tttPlayer").style.color = currentPlayer == 1 ?  _colorPlayer1 :  _colorPlayer2;
+  get("#tttPlayer").innerHTML = _content.tictactoe_turn_part1 + currentPlayer + _content.tictactoe_turn_part2;
 }
 
 /**
@@ -81,25 +81,25 @@ function checkPlayer(newPlayer = false) {
 
 function checkVictory() {
   // Check victory
-  let existingCombo = GAME_TABLE[LAST];
-  if ((GAME_TABLE[0] == existingCombo && GAME_TABLE[1] == existingCombo && GAME_TABLE[2] == existingCombo) ||
-      (GAME_TABLE[3] == existingCombo && GAME_TABLE[4] == existingCombo && GAME_TABLE[5] == existingCombo) ||
-      (GAME_TABLE[6] == existingCombo && GAME_TABLE[7] == existingCombo && GAME_TABLE[8] == existingCombo) ||
-      (GAME_TABLE[0] == existingCombo && GAME_TABLE[3] == existingCombo && GAME_TABLE[6] == existingCombo) ||
-      (GAME_TABLE[1] == existingCombo && GAME_TABLE[4] == existingCombo && GAME_TABLE[7] == existingCombo) ||
-      (GAME_TABLE[2] == existingCombo && GAME_TABLE[5] == existingCombo && GAME_TABLE[8] == existingCombo) ||
-      (GAME_TABLE[0] == existingCombo && GAME_TABLE[4] == existingCombo && GAME_TABLE[8] == existingCombo) ||
-      (GAME_TABLE[2] == existingCombo && GAME_TABLE[4] == existingCombo && GAME_TABLE[6] == existingCombo)) {
+  let existingCombo = gameTable[lastCell];
+  if ((gameTable[0] == existingCombo && gameTable[1] == existingCombo && gameTable[2] == existingCombo) ||
+      (gameTable[3] == existingCombo && gameTable[4] == existingCombo && gameTable[5] == existingCombo) ||
+      (gameTable[6] == existingCombo && gameTable[7] == existingCombo && gameTable[8] == existingCombo) ||
+      (gameTable[0] == existingCombo && gameTable[3] == existingCombo && gameTable[6] == existingCombo) ||
+      (gameTable[1] == existingCombo && gameTable[4] == existingCombo && gameTable[7] == existingCombo) ||
+      (gameTable[2] == existingCombo && gameTable[5] == existingCombo && gameTable[8] == existingCombo) ||
+      (gameTable[0] == existingCombo && gameTable[4] == existingCombo && gameTable[8] == existingCombo) ||
+      (gameTable[2] == existingCombo && gameTable[4] == existingCombo && gameTable[6] == existingCombo)) {
 
       endGame();
-      CURRENT_PLAYER == 1 ? get("#tttPlayer").style.color = _COLOR_PLAYER1 : get("#tttPlayer").style.color = _COLOR_PLAYER2;
-      get("#tttPlayer").innerHTML = _CONTENT.tictactoe_win_part1 + CURRENT_PLAYER + _CONTENT.tictactoe_win_part2;
+      currentPlayer == 1 ? get("#tttPlayer").style.color = _colorPlayer1 : get("#tttPlayer").style.color = _colorPlayer2;
+      get("#tttPlayer").innerHTML = _content.tictactoe_win_part1 + currentPlayer + _content.tictactoe_win_part2;
   }
 
   // Check draw
-  else if (GAME_TABLE.indexOf(" ") == -1) {
+  else if (gameTable.indexOf(" ") == -1) {
     endGame();
-    get("#tttPlayer").innerHTML = _CONTENT.tictactoe_draw;
+    get("#tttPlayer").innerHTML = _content.tictactoe_draw;
   }
 
   // Change player if no draw or victory
@@ -115,6 +115,6 @@ function endGame() {
   get("#gameList").style.display = "flex";
   get("#reload").style.display = "block";
 
-  GAME.tictactoe.games ++;
-  setStorage("GAMZ-save", JSON.stringify(GAME));
+  game.tictactoe.games ++;
+  setStorage("GAMZ-save", JSON.stringify(game));
 }

@@ -3,20 +3,21 @@
 // ============ INITIALISATION
 
 session_start();
-$_VERSION = "1.4.22";
+$_version = "1423";
 
 // =================================================
 // ============ MAIN
 
-$_PAGES = [
-    // Main
+$_pages = [
     "home" => ["", "home"],
+
+    // Games
     "tictactoe" => ["games", "tictactoe"],
     "memory" => ["games", "memory"],
     "hangman" => ["games", "hangman"],
 ];
 
-isset($_GET["a"]) ? loadPage($_PAGES[$_GET["a"]]) : loadPage($_PAGES["home"]);
+isset($_GET["a"]) ? loadPage($_pages[$_GET["a"]]) : loadPage($_pages["home"]);
 
 // =================================================
 // ============ FUNCTIONS
@@ -29,13 +30,13 @@ isset($_GET["a"]) ? loadPage($_PAGES[$_GET["a"]]) : loadPage($_PAGES["home"]);
  */
 
 function loadPage($content) {
-    global $_VERSION;
+    global $_version;
 
-    $_PATH = "app/";
-    $_DIRECTORY = $content[0];
-    $_NAME = $content[1];
+    $_path = "app/";
+    $_directory = $content[0];
+    $_name = $content[1];
 
-    require $_PATH . '_header.php';
-    require $_PATH . $_DIRECTORY . '/' . $_NAME . '.php';
-    require $_PATH . '_footer.php';
+    require $_path . 'header.php';
+    require $_path . $_directory . '/' . $_name . '.php';
+    require $_path . 'footer.php';
 }

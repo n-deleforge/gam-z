@@ -2,15 +2,17 @@
 /* ======== VARIABLES */
 
 :root {
-    --mainBackground: #262931;
-    --mainText: white;
-    --appTitle: white;
-    --appBackground: white;
-    --appSubTitle: indianred;
-    --homeListBackground: #262931;
-    --footerLinkColor: lightcoral;
-    --homeButton1: indianred;
-    --homeButton2: white;
+    --background-body: #262931;
+    --background-app: white;
+
+    --text-app: white;
+    --text-title: white;
+    --text-subtitle: indianred;
+    --text-footer-link: lightcoral;
+
+    --home-background: #262931;
+    --home-button-1: indianred;
+    --home-button-2: white;
 }
 
 /* ======================================== */
@@ -30,8 +32,8 @@ body {
     padding: 0;
     font-family: gameplay, sans-serif;
     font-size: 1.3em;
-    color: var(--mainText);
-    background-color: var(--mainBackground);
+    color: var(--text-app);
+    background-color: var(--background-body);
 }
 
 #container {
@@ -65,7 +67,7 @@ body {
     flex-wrap: wrap;
     align-items: center;
     padding: 3vh 0;
-    background: var(--homeListBackground);
+    background: var(--home-background);
 }
 
 .homeButton {
@@ -75,14 +77,13 @@ body {
     border: 5px solid transparent;
     text-align: center;
     text-decoration: none;
-    font-family: inherit;
     font-size: 1.2em;
-    color: var(--homeButton2);
-    background-color: var(--homeButton1);
+    color: var(--home-button-2);
+    background-color: var(--home-button-1);
 }
 
 .homeButton:hover {
-    border: 5px solid var(--homeButton2);
+    border: 5px solid var(--home-button-2);
 }
 
 #gameList {
@@ -98,7 +99,6 @@ body {
     border: 2px solid transparent;
     border-radius: 10px;
     text-transform: uppercase;
-    font-family: inherit;
     font-size: 2em;
 }
 
@@ -118,7 +118,7 @@ header {
     justify-content: center;
     padding: 5vh;
     font-size: 3em;
-    color: var(--appTitle);
+    color: var(--text-title);
 }
 
 #app {
@@ -127,7 +127,7 @@ header {
     justify-content: center;
     margin: 0 15vw;
     padding: 2vh;
-    background: var(--appBackground);
+    background: var(--background-app);
 }
 
 #app h1 {
@@ -135,7 +135,7 @@ header {
     position: relative;
     top: 4.5vh;
     justify-content: flex-start;
-    color: var(--appSubTitle);
+    color: var(--text-subtitle);
 }
 
 #void {
@@ -151,7 +151,7 @@ header {
 
 #footer a {
     text-decoration: none;
-    color: var(--footerLinkColor);
+    color: var(--text-footer-link);
 }
 
 @media(max-width:1024px) {

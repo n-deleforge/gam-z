@@ -1,11 +1,11 @@
 // =================================================
 // ============ VARIABLES
 
-const _NB_TO_WIN = 8;
-const _NB_PER_LINE = 4;
-let NB_CLICK = 0; let NB_FOUND = 0;
-let LIST_CARDS = get(".memoryCard"); let DISPLAY_CARDS = []; let PLAYED_CARDS = [];
-const PICTURES = ["cute", "cute", "glasses", "glasses", "love", "love", "sad", "sad", "shocked", "shocked", "smile", "smile", "tongue", "tongue", "wink", "wink"];
+const _nbToWin = 8;
+const _nbPerLine = 4;
+let nbClick = 0; let nbFound = 0;
+let listCards = get(".memoryCard"); let displayCards = []; let playedCards = [];
+const _pictures = ["cute", "cute", "glasses", "glasses", "love", "love", "sad", "sad", "shocked", "shocked", "smile", "smile", "tongue", "tongue", "wink", "wink"];
 
 // =================================================
 // ============ MAIN
@@ -14,7 +14,7 @@ const PICTURES = ["cute", "cute", "glasses", "glasses", "love", "love", "sad", "
  * Initialize the game : display score and add events on buttons
  **/
 
- get("~header").innerHTML = "Gam'z ~ " + _CONTENT.memory;
+get("~header").innerHTML = "Gam'z ~ " + _content.memory;
 get("#reload").addEventListener("click", () => { location.reload() });
 get("#play").addEventListener("click", createGame);
 get("#cheat").addEventListener("click", cheat);
@@ -29,56 +29,56 @@ function play(card) {
     let timeout = 2000;
 
     // If there are less than two played cards and if the card is not visible
-    if (PLAYED_CARDS.length < 2 && DISPLAY_CARDS[card] == 0) {
+    if (playedCards.length < 2 && displayCards[card] == 0) {
         get("#flip").play();
-        NB_CLICK++;
+        nbClick++;
         
-        DISPLAY_CARDS[card] = 1;
-        PLAYED_CARDS.push(card);
+        displayCards[card] = 1;
+        playedCards.push(card);
         turn(card);
    
         // If two cards are already played
-        if (PLAYED_CARDS.length == 2) {
+        if (playedCards.length == 2) {
             // And if they are identical
-            if (LIST_CARDS[PLAYED_CARDS[0]].data == LIST_CARDS[PLAYED_CARDS[1]].data) {
+            if (listCards[playedCards[0]].data == listCards[playedCards[1]].data) {
                 timeout = 0; // If found, no timeout needed
                 face = 2; // Founded
-                NB_FOUND++;
+                nbFound++;
                 
                 // And if all the cards are found
-                if (NB_FOUND == _NB_TO_WIN) endGame();
+                if (nbFound == _nbToWin) endGame();
             }
 
             // In any case, we turn the cards
-            DISPLAY_CARDS[PLAYED_CARDS[0]] = face;
-            DISPLAY_CARDS[PLAYED_CARDS[1]] = face;
+            displayCards[playedCards[0]] = face;
+            displayCards[playedCards[1]] = face;
 
             setTimeout(() => {
-                turn(PLAYED_CARDS[0]);
-                turn(PLAYED_CARDS[1]);
-                PLAYED_CARDS = [];
+                turn(playedCards[0]);
+                turn(playedCards[1]);
+                playedCards = [];
             }, timeout);
         }
     }
 }
 
 /**
- * Turn the card hidden, visible or found according the value of DISPLAY_CARDS[card]
+ * Turn the card hidden, visible or found according the value of displayCards[card]
  * @param {int} card the number of played card
  **/
 
 function turn(card) {
-    switch (DISPLAY_CARDS[card]) {
+    switch (displayCards[card]) {
         case 0: // face cachée
-            LIST_CARDS[card].src = "assets/images/memory/recto.png";
+            listCards[card].src = "assets/images/memory/recto.png";
             break;
 
         case 1: // face visible
-        LIST_CARDS[card].src = "assets/images/memory/" + LIST_CARDS[card].data + ".png";
+        listCards[card].src = "assets/images/memory/" + listCards[card].data + ".png";
             break;
 
         case 2: // paire trouvée
-        LIST_CARDS[card].classList.add("memoryFound");
+        listCards[card].classList.add("memoryFound");
             break;
     }
 }
@@ -94,15 +94,15 @@ function createGame() {
     get("#reload").style.display = "block";
 
     // Create arrays and randomize the cards
-    for (let i = 0; i < _NB_TO_WIN; i++) DISPLAY_CARDS.push(0, 0);
-    PICTURES.sort(() => Math.random() - 0.5);
+    for (let i = 0; i < _nbToWin; i++) displayCards.push(0, 0);
+    _pictures.sort(() => Math.random() - 0.5);
 
     // Add events on each cards
-    for (let i = 0; i < LIST_CARDS.length; i++) {
-        LIST_CARDS[i].src = _CONTENT.memory_pathPicture + 'recto.png';
-        LIST_CARDS[i].data = PICTURES[i]
-        LIST_CARDS[i].classList.remove("memoryFound"); 
-        LIST_CARDS[i].addEventListener("click", () => { play(i); });
+    for (let i = 0; i < listCards.length; i++) {
+        listCards[i].src = _content.memory_pathPicture + 'recto.png';
+        listCards[i].data = _pictures[i]
+        listCards[i].classList.remove("memoryFound"); 
+        listCards[i].addEventListener("click", () => { play(i); });
     }
 }
 
@@ -112,10 +112,10 @@ function createGame() {
 
 function cheat() {
     get("#cheat").style.display = "none";
-    for (let i = 0; i < LIST_CARDS.length; i++) {
-        DISPLAY_CARDS[i] = 2;
-        LIST_CARDS[i].src = _CONTENT.memory_pathPicture + LIST_CARDS[i].data + ".png";
-        LIST_CARDS[i].removeEventListener("click", () => { play(i); });
+    for (let i = 0; i < listCards.length; i++) {
+        displayCards[i] = 2;
+        listCards[i].src = _content.memory_pathPicture + listCards[i].data + ".png";
+        listCards[i].removeEventListener("click", () => { play(i); });
     }
 }
 
@@ -125,13 +125,13 @@ function cheat() {
 
 function endGame() {
     // Score
-    let score = 116 - NB_CLICK;
-    GAME.memory.lastScore = score;
-    if (score > GAME.memory.bestScore) GAME.memory.bestScore = score;
-    setStorage("GAMZ-save", JSON.stringify(GAME));
+    let score = 116 - nbClick;
+    game.memory.lastScore = score;
+    if (score > game.memory.bestScore) game.memory.bestScore = score;
+    setStorage("GAMZ-save", JSON.stringify(game));
 
     // Update the display
     get("#cheat").style.display = "none";
-    get("#memoryBoard").innerHTML = "<p>" + _CONTENT.memory_win_part1 + "</p>";
-    get("#memoryBoard").innerHTML += "<p>" + _CONTENT.memory_win_part2 + NB_CLICK + _CONTENT.memory_win_part3 + score + _CONTENT.memory_win_part4 + "</p>";
+    get("#memoryBoard").innerHTML = "<p>" + _content.memory_win_part1 + "</p>";
+    get("#memoryBoard").innerHTML += "<p>" + _content.memory_win_part2 + nbClick + _content.memory_win_part3 + score + _content.memory_win_part4 + "</p>";
 }

@@ -6,14 +6,16 @@
 // =================================================
 // ============ CORE VARIABLES
 
-const _VERSION = 1.4;
-const _GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/gam-z\">GitHub</a>";
-const _HOME = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">ForgeCode</a>";
-const _MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-const _BACK_LINK = "https://nicolas-deleforge.fr/my-apps/gamz/";
-const FRENCH = {
+let game;
+const _version = 1.4;
+const _github = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/gam-z\">GitHub</a>";
+const _home = "<a target=\"_blank\" href=\"https://nicolas-deleforge.fr/\">ForgeCode</a>";
+const _mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+const _backLink = "https://nicolas-deleforge.fr/my-apps/gamz/";
+
+const _french = {
     // Main
-    'footer': "Disponible sur " + _GITHUB + " (v " + _VERSION + ") ©  " + _HOME,
+    'footer': "Disponible sur " + _github + " (v " + _version + ") ©  " + _home,
     'onePlayerTitle': "1 joueur",
     'hangman': "Le pendu",
     'memory': "Memory",
@@ -52,9 +54,10 @@ const FRENCH = {
     'memory_win_part3': " clics, ton score est de ",
     'memory_win_part4': " points.",
 };
-const ENGLISH = {
+
+const _english = {
     // Main
-    'footer': "Available on " + _GITHUB + " (v " + _VERSION + ") ©  " + _HOME,
+    'footer': "Available on " + _github + " (v " + _version + ") ©  " + _home,
     'onePlayerTitle': "1 player",
     'hangman': "Hangman",
     'memory': "Memory",
@@ -98,11 +101,11 @@ const ENGLISH = {
 // ============ CORE INITIALISATION
 
 // Correct the bug with viewport on mobile
-if (_MOBILE) get("#container").style.minHeight = window.innerHeight + 'px';
+if (_mobile) get("#container").style.minHeight = window.innerHeight + 'px';
 
 // Create data game or parse it if existing
 if (!getStorage("GAMZ-save")) {
-    GAME = {
+    game = {
         'tictactoe' : {
             "games" : 0
         },
@@ -116,16 +119,16 @@ if (!getStorage("GAMZ-save")) {
         }
     }
 
-    setStorage("GAMZ-save", JSON.stringify(GAME));
-} else GAME = JSON.parse(getStorage("GAMZ-save"))
+    setStorage("GAMZ-save", JSON.stringify(game));
+} else game = JSON.parse(getStorage("GAMZ-save"))
 
 // Determine the language of the app
-const _CONTENT = navigator.language == "fr" || navigator.language == "fr-FR" ? FRENCH : ENGLISH;
+const _content = navigator.language == "fr" || navigator.language == "fr-FR" ? _french : _english;
 get('#manifest').href = navigator.language == "fr" || navigator.language == "fr-FR" ? "french.webmanifest" : "english.webmanifest";
-
-let names = Object.keys(_CONTENT);
-let values = Object.values(_CONTENT);
+let names = Object.keys(_content); let values = Object.values(_content);
 
 for (let i = 0; i < names.length; i++) {
-    if (get("#" + names[i])) get("#" + names[i]).innerHTML = values[i];
+    if (get("#" + names[i])) {
+        get("#" + names[i]).innerHTML = values[i];
+    }
 }

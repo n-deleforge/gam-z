@@ -1,9 +1,9 @@
 // =================================================
 // ============ SETTINGS 
 
-let ERROR = 0;  let MAX_ERROR = 9; let WORD_DATA; let WORD_STRING; let WORD_ARRAY;
-const _LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-const _WORDS = [
+let error = 0;  let maxError = 9; let wordData; let wordString; let wordArray;
+const _letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const _words = [
     "AEROPORT", "AFFAIRE", "ALBUM", "ALPHABET", "AMENER", "AMPOULE", "ANCIEN", "ANORAK", "ANTENNE", "APPAREIL", "APPORTER", "APPUYER", "APRES", "ARC", "ARMOIRE", "ARRET", "ARRIERE", "ARRIVER", "ARROSER", "ASSIETTE", "ASSIS", "ATTACHER", "ATTENDRE", "ATTENTION", "ATTERRIR", "ATTRAPER", "AU", "AUTANT", "AUTO", "AUTOMOBILISTE", "AUTORADIO", "AUTOUR", "AVANCER", "AVANT", "AVEC", "AVION", 
     "BAGAGE", "BAGUETTE", "BAIGNER", "BÂILLER", "BALLE", "BANC", "BARBE", "BARBOTER", "BARQUE", "BARRE", "BARREAU", "BAS", "BATEAU", "BEAUCOUP", "BIBLIOTHEQUE", "BLANC", "BLEU", "BOIS", "BOITE", "BONDIR", "BONNET", "BORD", "BOSSER", "BOTTE", "BOUCHER", "BOUCHON", "BOUDER", "BOUGER", "BOUSCULER", "BOUT", "BOUTEILLE", "BOUTON", "BRAS", "BRETELLE", "BRICOLAGE", "BRUIT", "BRUN", "BULLES", "BUREAU", 
     "CABANE", "CABINET", "CAGOULE", "CAHIER", "CAISSE", "CALME", "CAMARADE", "CAMESCOPE", "CAMION", "CANARD", "CARNET", "CARREAU", "CARTABLE", "CARTON", "CASIER", "CASQUE", "CASQUETTE", "CASSE", "CASSER", "CASSEROLE", "CASSETTE", "CATALOGUE", "CEDE", "CEDEROM", "CEINTURE", "CERCEAU", "CHAINE", "CHAISE", "CHAISES", "CHANSON", "CHAPEAU", "CHARGER", "CHAT", "CHAUD", "CHAUSSETTE", "CHAUSSON", "CHAUSSURE", "CHEMISE", "CHERCHER", "CHEVILLE", "CHIFFRE", "CHOISIR", "CHOSE", "CHUCHOTER", "CHUTE", "CIGARETTE", "CINQ", "CISEAUX", "CLASSE", "CLAVIER", "CLE", "CLOU", "COIN", "COL", "COLERE", "COLLANT", "COLLE", "COLLER", "COLORIAGE", "COLORIER", "COMMENCER", "COMPARER", "COMPTER", "CONDUIRE", "CONSTRUIRE", "CONTE", "CONTINUER", "CONTRAIRE", "CONTRE", "COPAIN", "COPIER", "COQUILLAGE", "COQUILLETTE", "COQUIN", "CORDE", "CORPS", "COTE", "COU", "COUCHE", "COUDE", "COUDRE", "COULEUR", "COULOIR", "COUPER", "COURIR", "COURONNE", "COURT", "CRAIE", "CRAVATE", "CROCHET", "CUBE", "CUILLERE", "CUISSE", "CULOTTE", "CURIEUX", "CUVETTE", 
@@ -37,7 +37,7 @@ const _WORDS = [
  * Initialize the game : modify header and add events on buttons
  **/
 
-get("~header").innerHTML = "Gam'z ~ " + _CONTENT.hangman;
+get("~header").innerHTML = "Gam'z ~ " + _content.hangman;
 get("#reload").addEventListener("click", () => { location.reload(); });
 get("#play").addEventListener("click", startGame);
 
@@ -49,23 +49,23 @@ get("#play").addEventListener("click", startGame);
 function play(letterChoosen) {
     // Check if it's a correct letter
     let positions = [];
-    for (i = 0; i < WORD_STRING.length; i++) {
-        if (WORD_STRING[i] == letterChoosen) positions.push(i);
+    for (i = 0; i < wordString.length; i++) {
+        if (wordString[i] == letterChoosen) positions.push(i);
     }
 
     // Then, if the letter is correct
     if (positions.length != 0) {
         for (i = 0; i < positions.length; i++) {
-            WORD_ARRAY[positions[i]] = letterChoosen;
+            wordArray[positions[i]] = letterChoosen;
         }
-        get("#" + letterChoosen).style.background = getVariableCSS("hangmanCorrectLetter");
+        get("#" + letterChoosen).style.background = getVariableCSS("hangman-correct");
     }
     
     //Or, if the letter is incorrect
     else {
-        ERROR++;
+        error++;
         navigator.vibrate('300');
-        get("#" + letterChoosen).style.background = getVariableCSS("hangmanIncorrectLetter");
+        get("#" + letterChoosen).style.background = getVariableCSS("hangman-incorrect");
     }
 
     // In any cases, disable the letter
@@ -73,15 +73,14 @@ function play(letterChoosen) {
     updateGame();
 }
 
-
 /**
  * Start the game in calling the chooseWord function and display the game screen
  **/
 
 function startGame() {
-    WORD_DATA = chooseWord(); 
-    WORD_STRING = WORD_DATA[0];
-    WORD_ARRAY= WORD_DATA[1];
+    wordData = chooseWord(); 
+    wordString = wordData[0];
+    wordArray= wordData[1];
 
     generateKeyboard();
     updateGame();
@@ -98,31 +97,31 @@ function startGame() {
 function updateGame() {
     // Transform the word into underscore
     let wordAsUnderscore = "";
-    for (i = 0; i < WORD_ARRAY.length; i++) {
-        wordAsUnderscore += WORD_ARRAY[i] + " ";
+    for (i = 0; i < wordArray.length; i++) {
+        wordAsUnderscore += wordArray[i] + " ";
     }
     get('#hangmanGuess').innerHTML = wordAsUnderscore.trim();
 
     // Error count
-    if (MAX_ERROR == ERROR + 1) {
+    if (maxError == error + 1) {
         get('#hangmanResults').style.color = "red";
-        get('#hangmanResults').innerHTML = _CONTENT.hangman_lastTry;
+        get('#hangmanResults').innerHTML = _content.hangman_lastTry;
     }
-    else get('#hangmanResults').innerHTML = (MAX_ERROR - ERROR) + _CONTENT.hangman_try;
+    else get('#hangmanResults').innerHTML = (maxError - error) + _content.hangman_try;
 
     // Lose
-    if (ERROR == MAX_ERROR) {
+    if (error == maxError) {
         get('#hangmanResults').style.display = "none";
-        get('#hangmanGuess').innerHTML = _CONTENT.hangman_lost + WORD_STRING;
+        get('#hangmanGuess').innerHTML = _content.hangman_lost + wordString;
         get('#hangmanKeyboard').style.display = "none";
         get("#gameList").style.display = "flex";
         get('#reload').style.display = "block";
     }
 
     // Win
-    else if (WORD_ARRAY.indexOf("_") == -1) {
+    else if (wordArray.indexOf("_") == -1) {
         get('#hangmanResults').style.display = "none";
-        get('#hangmanGuess').innerHTML = "<p>" + _CONTENT.hangman_win_part1 + ERROR + _CONTENT.hangman_win_part2 + "</p>";
+        get('#hangmanGuess').innerHTML = "<p>" + _content.hangman_win_part1 + error + _content.hangman_win_part2 + "</p>";
         get('#hangmanKeyboard').style.display = "none";
         get("#gameList").style.display = "flex";
         get('#reload').style.display = "block";
@@ -136,8 +135,8 @@ function updateGame() {
 
 function chooseWord() {
     // Word as a string
-    let nb = rand(0, _WORDS.length);
-    let wordString = _WORDS[nb];
+    let nb = rand(0, _words.length);
+    let wordString = _words[nb];
 
     // Word as an array
     let wordArray = [];
@@ -151,13 +150,13 @@ function chooseWord() {
  **/
 
 function generateKeyboard() {
-    for (let i = 0; i < _LETTERS.length; i ++) {
+    for (let i = 0; i < _letters.length; i ++) {
         let elem = document.createElement("button");
-        elem.innerHTML = _LETTERS[i];
-        elem.id = _LETTERS[i];
+        elem.innerHTML = _letters[i];
+        elem.id = _letters[i];
         elem.classList.add("keyboardButton");
         elem.classList.add("gameButton");
-        elem.addEventListener("click", function() { play(_LETTERS[i]) });
+        elem.addEventListener("click", function() { play(_letters[i]) });
         get("#hangmanKeyboard").appendChild(elem);
     }
 }
